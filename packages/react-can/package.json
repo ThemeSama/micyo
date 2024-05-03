@@ -1,6 +1,6 @@
 {
-  "name": "@micyoui/react-can",
-  "version": "1.0.0",
+  "name": "@micyo/react-can",
+  "version": "0.0.1",
   "description": "Simple authorisation library for react",
   "type": "module",
   "types": "dist/legacy/index.d.ts",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/micyoui/micyoui.git",
+    "url": "https://github.com/ThemeSama/micyo.git",
     "directory": "packages/react-can"
   },
   "keywords": [
