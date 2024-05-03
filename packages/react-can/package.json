@@ -1,0 +1,43 @@
+{
+  "name": "@micyo/react-can",
+  "version": "0.0.1",
+  "description": "Simple authorisation library for react",
+  "type": "module",
+  "types": "dist/legacy/index.d.ts",
+  "main": "dist/legacy/index.cjs",
+  "module": "dist/legacy/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/modern/index.d.ts",
+        "default": "./dist/modern/index.js"
+      },
+      "require": {
+        "types": "./dist/modern/index.d.cts",
+        "default": "./dist/modern/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ThemeSama/micyo.git",
+    "directory": "packages/react-can"
+  },
+  "keywords": [
+    "ability",
+    "user",
+    "abilities",
+    "permission",
+    "forbidden"
+  ],
+  "author": "themesama",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.3.0"
+  }
+}
