@@ -1,11 +1,11 @@
-# @micyo - tiny libraries
+# @micyoui - tiny libraries
 
 I have prepared the relevant repository to share the tools and libraries that I frequently use in projects as open source. This way, I can easily use them in my future projects. We can also collaborate to further enhance the project together.
 
 ## Libraries
 
-- [@micyo/react-can](packages/react-can/README.md) | Simple authorisation library for React projects
-- @micyo/react-settings | Apply the global project settings of client's crosstabs.
+- [@micyoui/react-can](packages/react-can/README.md) | Simple authorisation library for React projects
+- @micyoui/react-settings | Apply the global project settings of client's crosstabs.
 
 ## License
 

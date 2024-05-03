@@ -1,4 +1,4 @@
-# @micyo/react-can
+# @micyoui/react-can
 
 Simple authorisation library for React projects
 
@@ -7,13 +7,13 @@ Simple authorisation library for React projects
 The package can be installed via npm
 
 ```bash
-npm install @micyo/react-can --save
+npm install @micyoui/react-can --save
 ```
 
 or via yarn
 
 ```bash
-yarn add @micyo/react-can
+yarn add @micyoui/react-can
 ```
 
 ## Configuration
@@ -21,7 +21,7 @@ yarn add @micyo/react-can
 AbilityProvider is used to manage the permission list with context API. Wrap the entire project or the part needed for authorization controls with the AbilityProvider component. You can define default permissions with the 'list' prop.
 
 ```jsx
-import { AbilityProvider } from '@micyo/react-can';
+import { AbilityProvider } from '@micyoui/react-can';
 
 const DEFAULT_ABILITIES = ['READ_POST'];
 
@@ -39,7 +39,7 @@ It is possible to perform authorization control on JSX content with two differen
 **Can** component
 
 ```jsx
-import { Can } from '@micyo/react-can';
+import { Can } from '@micyoui/react-can';
 
 const Page = ({ children }) => {
   return <Can i="READ_POST">{children}</Can>;
@@ -49,7 +49,7 @@ const Page = ({ children }) => {
 **Cannot** component
 
 ```jsx
-import { Cannot } from '@micyo/react-can';
+import { Cannot } from '@micyoui/react-can';
 
 const Page403 = () => {
   return <Cannot i="READ_POST">You cannot read posts!</Cannot>;
@@ -61,7 +61,7 @@ const Page403 = () => {
 You can use the useAbility hook to add new permissions to the user, remove some of the existing permissions, or remove all permissions altogether from within the page. You can perform permission control at the JavaScript level using the can method. Additionally, you can perform boolean checks at the prop level using the can method in JSX content.
 
 ```jsx
-import { useAbility } from '@micyo/react-can';
+import { useAbility } from '@micyoui/react-can';
 
 const Page = () => {
   const {
