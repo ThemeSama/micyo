@@ -1,6 +1,6 @@
 {
   "name": "@micyo/react-can",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Simple authorisation library for react",
   "type": "module",
   "types": "dist/legacy/index.d.ts",
@@ -34,6 +34,10 @@
     "abilities",
     "permission",
     "forbidden"
+  ],
+  "files": [
+    "dist",
+    "CHANGELOG.md"
   ],
   "author": "themesama",
   "license": "MIT",
