@@ -1,4 +1,5 @@
 'use client';
+import * as React from 'react';
 import { useCallback, useEffect, useState, useRef } from 'react';
 import { AbilityProviderProps, UseAbility } from '../types/Ability';
 import AbilityContext from './AbilityContext';
@@ -6,7 +7,7 @@ import useStorage from '../hooks/useStorage';
 
 const MICYO_STORAGE_KEY = 'micyo_abilities';
 
-export const AbilityProvider = ({ list, children }: AbilityProviderProps) => {
+export const AbilityProvider = ({ list, persistent = true, children }: AbilityProviderProps) => {
   const { setItem, getItem } = useStorage();
   const [abilities, setAbilities] = useState<string[]>([]);
   const isFirstRender = useRef(true);
@@ -44,11 +45,9 @@ export const AbilityProvider = ({ list, children }: AbilityProviderProps) => {
   // remove ability
   const removeAbility = useCallback(
     (ability: string) => {
-      setAbilities((currentAbilities) =>
-        currentAbilities.indexOf(ability) >= 0
-          ? [...currentAbilities.splice(currentAbilities.indexOf(ability), 1)]
-          : [...currentAbilities]
-      );
+      setAbilities((currentAbilities) => [
+        ...currentAbilities.filter((currentAbility) => currentAbility !== ability)
+      ]);
     },
     [setAbilities]
   );
@@ -75,19 +74,19 @@ export const AbilityProvider = ({ list, children }: AbilityProviderProps) => {
   useEffect(() => {
     const abilityList = getItem(MICYO_STORAGE_KEY);
 
-    if (abilityList !== null && abilityList !== '' && isFirstRender.current) {
-      setAbilities(JSON.parse(abilityList));
-    } else if (isFirstRender.current) {
-      addAbilities(list);
+    if (abilityList !== null && abilityList !== '' && isFirstRender.current && persistent) {
+      setAbilities(JSON.parse(abilityList || ''));
+    } else if (isFirstRender.current || !persistent) {
+      setAbilities(list || []);
     }
-  }, [setAbilities, getItem, list, addAbilities]);
+  }, [setAbilities, getItem, list, persistent]);
 
   const updateAbilities = useCallback(
-    ({ key, newValue, oldValue }) => {
+    ({ key, newValue, oldValue }: StorageEvent) => {
       if (key === MICYO_STORAGE_KEY && newValue !== null) {
         setAbilities(JSON.parse(newValue));
       } else if (key === MICYO_STORAGE_KEY && newValue === null) {
-        setAbilities(JSON.parse(oldValue));
+        setAbilities(JSON.parse(oldValue || ''));
       }
     },
     [setAbilities]
@@ -102,12 +101,12 @@ export const AbilityProvider = ({ list, children }: AbilityProviderProps) => {
 
   // push abilities update to across tabs
   useEffect(() => {
-    if (!isFirstRender.current) {
+    if (!isFirstRender.current && persistent) {
       setItem(MICYO_STORAGE_KEY, JSON.stringify(abilities));
     } else {
       isFirstRender.current = false;
     }
-  }, [abilities, setItem]);
+  }, [abilities, setItem, persistent]);
 
   const contextValues: UseAbility = {
     abilities,

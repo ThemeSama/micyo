@@ -3,7 +3,6 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "tsup.config.js",
-    "src/components/Can.stories.tsx"
+    "tsup.config.js"
   ]
 }

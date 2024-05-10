@@ -1,7 +1,7 @@
 {
-  "name": "@micyo/react-can",
-  "version": "1.0.1",
-  "description": "Simple authorisation library for react",
+  "name": "@micyo/react-settings",
+  "version": "1.0.0",
+  "description": "Simple global settings library for react",
   "type": "module",
   "types": "dist/legacy/index.d.ts",
   "main": "dist/legacy/index.cjs",
@@ -26,14 +26,13 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/ThemeSama/micyo.git",
-    "directory": "packages/react-can"
+    "directory": "packages/react-settings"
   },
   "keywords": [
-    "ability",
+    "settings",
     "user",
-    "abilities",
-    "permission",
-    "forbidden"
+    "global",
+    "context"
   ],
   "files": [
     "dist",
@@ -42,10 +41,6 @@
   "author": "themesama",
   "license": "MIT",
   "peerDependencies": {
-    "react": "^18.3.1"
-  },
-  "devDependencies": {
-    "@types/react": "^18.3.1",
-    "react": "^18.3.1"
+    "react": "^18.3.0"
   }
 }
