@@ -1,4 +1,3 @@
-import { ReactNode, ReactElement } from 'react';
 import useAbility from '../hooks/useAbility';
 import { CanProps } from '../types/Ability';
 
@@ -9,7 +8,7 @@ import { CanProps } from '../types/Ability';
  * @param params.children {ReactElement} - Content
  * @returns {ReactNode} Content
  */
-export const Cannot = ({ i, children }: CanProps): ReactNode => {
+export const Cannot = ({ i, children }: CanProps) => {
   const { can } = useAbility();
   return !can(i) && children;
 };

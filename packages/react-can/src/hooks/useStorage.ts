@@ -12,9 +12,7 @@ const useStorage = (): UseStorage => {
 
   const getItem = useCallback((key: string) => {
     try {
-      const item = window.localStorage.getItem(key);
-
-      return item;
+      return window.localStorage.getItem(key);
     } catch (error) {
       console.warn(`Error getting localStorage key “${key}”:`, error);
     }
