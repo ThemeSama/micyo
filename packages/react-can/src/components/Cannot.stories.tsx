@@ -23,6 +23,9 @@ const meta = {
       control: 'select',
       options: ['READ_POST', 'DELETE_POST'],
       description: 'Ability name'
+    },
+    children: {
+      control: false
     }
   }
 } satisfies Meta<typeof Cannot>;

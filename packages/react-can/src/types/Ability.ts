@@ -8,13 +8,9 @@ export type AbilityProviderProps = {
 };
 
 export interface CanProps {
-  /**
-   * Ability name
-   */
+  /** Ability name */
   i: string;
-  /**
-   * Content
-   */
+  /** Content */
   children: JSX.Element;
 }
 

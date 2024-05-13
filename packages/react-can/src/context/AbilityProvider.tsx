@@ -7,6 +7,9 @@ import useStorage from '../hooks/useStorage';
 
 const MICYO_STORAGE_KEY = 'micyo_abilities';
 
+/**
+ * AbilityProvider is used to manage the permission list with context API. Wrap the entire project or the part needed for authorization controls with the AbilityProvider component. You can define default permissions with the 'list' prop.
+ */
 export const AbilityProvider = ({ list, persistent = true, children }: AbilityProviderProps) => {
   const { setItem, getItem } = useStorage();
   const [abilities, setAbilities] = useState<string[]>([]);
