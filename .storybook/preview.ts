@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react';
+import './global.css';
 
 const preview: Preview = {
   parameters: {
@@ -10,7 +11,7 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['*', ['About Library', '*', 'Changelog']]
+        order: ['react-can', ['About Library', 'AbilityProvider', '*', 'Changelog']]
       }
     }
   }

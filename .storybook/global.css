@@ -1,0 +1,71 @@
+body {
+  font-family:
+    'Nunito Sans',
+    -apple-system,
+    '.SFNSText-Regular',
+    'San Francisco',
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Helvetica Neue',
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+.micyo-story-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Hide default HTML checkbox */
+.micyo-story-switch input {
+  display: none;
+}
+
+/* The slider */
+.micyo-story-slider {
+  position: relative;
+  cursor: pointer;
+  background-color: #ccc;
+  width: 2.85rem;
+  height: 1.6rem;
+}
+
+.micyo-story-slider:before {
+  position: absolute;
+  content: '';
+  height: 1.35rem;
+  width: 1.35rem;
+  left: 0.125rem;
+  bottom: 0.125rem;
+  background-color: white;
+  transition: 0.3s;
+}
+
+.micyo-story-switch input:checked + .micyo-story-slider {
+  background-color: #029cfd;
+}
+
+.micyo-story-switch input:focus + .micyo-story-slider {
+  box-shadow: 0 0 1px #029cfd;
+}
+
+.micyo-story-switch input:checked + .micyo-story-slider:before {
+  transform: translateX(1.25rem);
+}
+
+/* Rounded sliders */
+.micyo-story-slider.round {
+  border-radius: 0.8rem;
+}
+
+.micyo-story-slider.round:before {
+  border-radius: 50%;
+}
+
+.micyo-story-ul {
+  padding-left: 1.25rem;
+}

@@ -12,7 +12,10 @@ const meta = {
     layout: 'centered'
   },
   argTypes: {
-    list: { control: 'inline-check', options: ['READ_POST', 'DELETE_POST'] }
+    list: { control: 'inline-check', options: ['READ_POST', 'DELETE_POST'] },
+    children: {
+      control: false
+    }
   },
   tags: ['autodocs']
 } satisfies Meta<typeof AbilityProvider>;

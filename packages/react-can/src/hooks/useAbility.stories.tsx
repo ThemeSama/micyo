@@ -27,10 +27,11 @@ interface ISwitchButton {
   onClick?(checked: boolean): void;
 }
 
-const SwitchButton = ({ label, checked, onClick }: ISwitchButton) => {
+const StorySwitch = ({ label, checked, onClick }: ISwitchButton) => {
   return (
-    <label>
+    <label className="micyo-story-switch">
       <input type="checkbox" onChange={(e) => onClick(e.target.checked)} checked={checked} />
+      <span className="micyo-story-slider round"></span>
       <span>{label}</span>
     </label>
   );
@@ -51,13 +52,17 @@ export const Hook: Story = {
     return (
       <>
         <h3>Ability List</h3>
-        <ul>
-          {abilities.map((ability) => (
-            <li key={ability}>{ability}</li>
-          ))}
-        </ul>
-
-        <SwitchButton
+        {abilities.length ? (
+          <ul className="micyo-story-ul">
+            {abilities.map((ability) => (
+              <li key={ability}>{ability}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>There is no ability!</p>
+        )}
+        <h4>Controls</h4>
+        <StorySwitch
           label="Read Post"
           checked={can('READ_POST')}
           onClick={(checked) => {
@@ -68,11 +73,10 @@ export const Hook: Story = {
             }
           }}
         />
-        <SwitchButton
+        <StorySwitch
           label="Add Post"
           checked={can('ADD_POST')}
           onClick={(checked) => {
-            console.log(checked);
             if (checked) {
               addAbility('ADD_POST');
             } else {
@@ -80,7 +84,7 @@ export const Hook: Story = {
             }
           }}
         />
-        <SwitchButton
+        <StorySwitch
           label="Edit and Delete Post"
           checked={can('EDIT_POST') && can('DELETE_POST')}
           onClick={(checked) => {
