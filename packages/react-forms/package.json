@@ -1,7 +1,7 @@
 {
-  "name": "@micyo/react-can",
-  "version": "1.0.1",
-  "description": "Simple authorisation library for react",
+  "name": "@micyo/react-forms",
+  "version": "1.0.0",
+  "description": "Simple and clear form implementation with React Hook Forms",
   "type": "module",
   "types": "dist/legacy/index.d.ts",
   "main": "dist/legacy/index.cjs",
@@ -25,15 +25,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ThemeSama/micyo.git",
-    "directory": "packages/react-can"
+    "url": "git+https://github.com/ThemeSama/micyo.git",
+    "directory": "packages/react-forms"
   },
   "keywords": [
-    "ability",
-    "user",
-    "abilities",
-    "permission",
-    "forbidden"
+    "react",
+    "forms",
+    "input",
+    "select",
+    "hook",
+    "forms"
   ],
   "files": [
     "dist",
@@ -46,10 +47,15 @@
   },
   "homepage": "https://github.com/ThemeSama/micyo#readme",
   "peerDependencies": {
-    "react": "^18.3.1"
+    "react": "^18.3.1",
+    "react-hook-form": "^7.51.4"
   },
   "devDependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@types/react": "^18.3.1",
-    "react": "^18.3.1"
+    "react": "^18.3.1",
+    "react-hook-form": "^7.51.4",
+    "yup": "^1.4.0",
+    "zod": "^3.23.8"
   }
 }
