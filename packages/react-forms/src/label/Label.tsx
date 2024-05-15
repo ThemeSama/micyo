@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useMemo } from 'react';
 import useFormContext from '../form/hooks/useFormContext';
+import { get } from 'react-hook-form';
 
 interface ILabel {
   label?: string;
@@ -13,15 +14,13 @@ const Label = ({ label, name }: ILabel) => {
   const isRequired = useMemo((): boolean => {
     const schema = formContext?.schema;
 
-    console.log(schema);
-
     // zod schema required control
-    if (schema?.shape[name] && !schema?.shape[name]?.isOptional()) {
+    if (schema && get(schema?.shape, name) && !schema?.shape[name]?.isOptional()) {
       return true;
     }
 
     // yup schema required control
-    if (schema?.fields[name] && !schema?.fields[name]?.spec?.optional) {
+    if (schema && !get(schema?.fields, `${name}.spec.optional`, true)) {
       return true;
     }
 

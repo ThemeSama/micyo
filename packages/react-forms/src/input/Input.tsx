@@ -4,7 +4,7 @@ import Label from '../label/Label';
 import useFormContext from '../form/hooks/useFormContext';
 import Feedback from '../feedback/Feedback';
 
-interface IInput {
+export interface IInput {
   label?: string;
   name: string;
   type?: HTMLInputTypeAttribute;

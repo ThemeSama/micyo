@@ -8,7 +8,7 @@ interface IFeedback {
 
 const Feedback = ({ name }: IFeedback) => {
   const formContext = useFormContext(),
-    error = get(formContext?.formState?.errors, name);
+    error = get(formContext?.hookForm?.formState?.errors, name);
 
   return error?.message ? <span>{error.message}</span> : null;
 };

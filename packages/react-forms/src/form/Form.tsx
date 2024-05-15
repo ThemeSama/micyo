@@ -6,12 +6,12 @@ interface IForm {
   onSubmit?: React.FormEventHandler;
   method?: 'post' | 'get';
   schema?: object;
-  columns: Number;
+  columns?: number;
   children: ReactNode;
 }
 
-const Form = ({ onSubmit, method = 'post', schema, columns = 1, children, ...props }: IForm) => {
-  const contextProps = { columns, schema, ...props };
+const Form = ({ onSubmit, method = 'post', schema, columns = 1, children, ...hookForm }: IForm) => {
+  const contextProps = { columns, schema, hookForm };
 
   return (
     <form noValidate onSubmit={onSubmit} method={method}>

@@ -22,7 +22,7 @@ export default meta;
 type Story = StoryObj<typeof Form>;
 
 const schema = yup.object().shape({
-  username: yup.string().min(19).required(),
+  username: yup.string().required(),
   password: yup.string()
 });
 
@@ -35,7 +35,7 @@ const schemaZod = z
     username: true
   });
 
-export const Forms: Story = {
+export const YupValidation: Story = {
   render: () => {
     const { handleSubmit, register, ...form } = useForm({
       resolver: yupResolver(schema)
@@ -47,6 +47,26 @@ export const Forms: Story = {
 
     return (
       <Form onSubmit={handleSubmit(onSubmit)} schema={schema} {...form}>
+        <Input label="User Name" {...register('username')} />
+        <Input label="Password" type="password" {...register('password')} />
+        <Submit label="Send" />
+      </Form>
+    );
+  }
+};
+
+export const ZodValidation: Story = {
+  render: () => {
+    const { handleSubmit, register, ...form } = useForm({
+      resolver: zodResolver(schemaZod)
+    });
+
+    const onSubmit = (data: object) => {
+      console.log(data);
+    };
+
+    return (
+      <Form onSubmit={handleSubmit(onSubmit)} schema={schemaZod} {...form}>
         <Input label="User Name" {...register('username')} />
         <Input label="Password" type="password" {...register('password')} />
         <Submit label="Send" />

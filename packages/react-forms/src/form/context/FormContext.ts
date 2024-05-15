@@ -1,10 +1,12 @@
 import { createContext } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
-export interface IFormContext extends UseFormReturn {
-  schema: any;
-}
+type TFormContext = {
+  hookForm?: UseFormReturn;
+  schema?: any;
+  columns?: number;
+};
 
-const FormContext = createContext<IFormContext>({} as IFormContext);
+const FormContext = createContext<TFormContext>({} as TFormContext);
 
 export default FormContext;
