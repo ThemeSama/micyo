@@ -5,10 +5,11 @@ import { get } from 'react-hook-form';
 
 interface ILabel {
   label?: string;
+  htmlFor?: string;
   name: string;
 }
 
-const Label = ({ label, name }: ILabel) => {
+const Label = ({ label, name, htmlFor }: ILabel) => {
   const formContext = useFormContext();
 
   const isRequired = useMemo((): boolean => {
@@ -28,7 +29,7 @@ const Label = ({ label, name }: ILabel) => {
   }, [formContext?.schema]);
 
   return label ? (
-    <label>
+    <label htmlFor={htmlFor} className="micyo-label">
       {label}
       {isRequired && <span>*</span>}
     </label>

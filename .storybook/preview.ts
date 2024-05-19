@@ -14,7 +14,9 @@ const preview: Preview = {
         order: ['react-can', ['About Library', 'AbilityProvider', '*', 'Changelog']]
       }
     }
-  }
+  },
+
+  tags: ['autodocs']
 };
 
 export default preview;

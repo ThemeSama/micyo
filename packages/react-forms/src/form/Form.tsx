@@ -1,22 +1,47 @@
 import * as React from 'react';
-import { ReactNode } from 'react';
+import { ReactNode, FormEventHandler } from 'react';
 import { FormProvider } from './context/FormProvider';
+import styled from 'styled-components';
+import { gridTemplate } from '../helpers/grid';
+import { TColumns } from '../types';
+import { FieldValues, FormState } from 'react-hook-form';
 
-interface IForm {
-  onSubmit?: React.FormEventHandler;
+export interface IForm<TFieldValues extends FieldValues = FieldValues> {
+  onSubmit?: FormEventHandler;
   method?: 'post' | 'get';
   schema?: object;
-  columns?: number;
+  className?: string;
+  columns?: TColumns;
+  formState?: FormState<TFieldValues>;
   children: ReactNode;
 }
 
-const Form = ({ onSubmit, method = 'post', schema, columns = 1, children, ...hookForm }: IForm) => {
+const StyledForm = styled.form<{ $columns?: TColumns }>`
+  ${(props) => gridTemplate(props?.$columns)}
+`;
+
+const Form = ({
+  onSubmit,
+  method = 'post',
+  schema,
+  className = '',
+  columns,
+  children,
+  ...hookForm
+}: IForm) => {
   const contextProps = { columns, schema, hookForm };
 
   return (
-    <form noValidate onSubmit={onSubmit} method={method}>
-      <FormProvider {...contextProps}>{children}</FormProvider>
-    </form>
+    <FormProvider {...contextProps}>
+      <StyledForm
+        noValidate
+        onSubmit={onSubmit}
+        method={method}
+        className={`micyo-form ${className}`}
+        $columns={columns}>
+        {children}
+      </StyledForm>
+    </FormProvider>
   );
 };
 

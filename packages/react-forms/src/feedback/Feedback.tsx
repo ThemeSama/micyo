@@ -10,7 +10,9 @@ const Feedback = ({ name }: IFeedback) => {
   const formContext = useFormContext(),
     error = get(formContext?.hookForm?.formState?.errors, name);
 
-  return error?.message ? <span>{error.message}</span> : null;
+  return error && error?.message ? (
+    <span className="micyo-field-feedback">{error.message}</span>
+  ) : null;
 };
 
 export default Feedback;

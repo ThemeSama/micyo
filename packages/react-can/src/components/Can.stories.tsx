@@ -8,7 +8,7 @@ const meta = {
   title: 'react-can/Can',
   component: Can,
   decorators: [
-    (Story: StoryObj) => (
+    (Story) => (
       <AbilityProvider list={['READ_POST']} persistent={false}>
         <Story />
       </AbilityProvider>
@@ -38,8 +38,8 @@ export const Access: Story = {
   args: {
     i: 'READ_POST'
   },
-  render: (args: CanProps) => (
-    <Can {...args}>
+  render: (args) => (
+    <Can i={args?.i}>
       <div>Congratulations, you can read posts!</div>
     </Can>
   )
@@ -50,7 +50,7 @@ export const Restrict: Story = {
     i: 'DELETE_POST'
   },
   render: (args: CanProps) => (
-    <Can {...args}>
+    <Can i={args?.i}>
       <div>Congratulations, you can read posts!</div>
     </Can>
   )

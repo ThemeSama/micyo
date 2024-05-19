@@ -5,11 +5,12 @@ type ButtonTypes = 'button' | 'submit' | 'reset';
 interface IButton {
   label?: string;
   type: ButtonTypes;
+  className?: string;
 }
 
-const Button = ({ label, type = 'button', ...props }: IButton) => {
+const Button = ({ label, type = 'button', className = '', ...props }: IButton) => {
   return (
-    <button type={type} {...props}>
+    <button type={type} className={`micyo-btn ${className}`} {...props}>
       {label}
     </button>
   );
