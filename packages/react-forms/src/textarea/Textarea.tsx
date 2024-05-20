@@ -1,32 +1,31 @@
 import * as React from 'react';
-import { forwardRef, HTMLInputTypeAttribute } from 'react';
+import { forwardRef } from 'react';
 import Label from '../label/Label';
 import Feedback from '../feedback/Feedback';
 import useFieldId from '../hooks/useFieldId';
 import FieldWrapper from '../wrapper/FieldWrapper';
 
-export interface IInput {
+export interface ITextarea {
   id?: string;
   label?: string;
   name: string;
   className?: string;
   colSpan?: number;
   desc?: string;
-  type?: HTMLInputTypeAttribute;
 }
 
-const Input = forwardRef<HTMLInputElement, IInput>(
-  ({ id, label, type = 'text', name, className, colSpan, desc, ...props }, ref) => {
+const Textarea = forwardRef<HTMLTextAreaElement, ITextarea>(
+  ({ id, label, name, className, colSpan, desc, ...props }, ref) => {
     const fieldId = useFieldId(id);
 
     return (
-      <FieldWrapper colSpan={colSpan} type={type} className={className}>
+      <FieldWrapper colSpan={colSpan} type="textarea" className={className}>
         <Label label={label} name={name} htmlFor={fieldId} />
-        <input ref={ref} id={fieldId} name={name} type={type} {...props} />
+        <textarea ref={ref} id={fieldId} name={name} {...props} />
         <Feedback name={name} desc={desc} />
       </FieldWrapper>
     );
   }
 );
 
-export default Input;
+export default Textarea;

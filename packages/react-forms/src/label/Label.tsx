@@ -6,7 +6,7 @@ import { get } from 'react-hook-form';
 interface ILabel {
   label?: string;
   htmlFor?: string;
-  name: string;
+  name?: string;
 }
 
 const Label = ({ label, name, htmlFor }: ILabel) => {
@@ -16,7 +16,7 @@ const Label = ({ label, name, htmlFor }: ILabel) => {
     const schema = formContext?.schema;
 
     // zod schema required control
-    if (schema && get(schema?.shape, name) && !schema?.shape[name]?.isOptional()) {
+    if (schema && get(schema?.shape, name) && !get(schema?.shape, name)?.isOptional()) {
       return true;
     }
 
