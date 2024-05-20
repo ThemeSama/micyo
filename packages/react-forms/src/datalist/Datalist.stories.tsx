@@ -1,10 +1,10 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import Input, { IInput } from './Input';
+import Datalist from './Datalist';
 
 const meta = {
-  title: 'react-forms/Input',
-  component: Input,
+  title: 'react-forms/Datalist',
+  component: Datalist,
   parameters: {
     layout: 'centered'
   },
@@ -33,7 +33,7 @@ const meta = {
     }
   },
   tags: ['autodocs']
-} satisfies Meta<typeof Input>;
+} satisfies Meta<typeof Datalist>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -42,22 +42,7 @@ export const Default: Story = {
   args: {
     label: 'User Name',
     name: 'username',
-    type: 'text'
-  }
-};
-
-export const Password: Story = {
-  args: {
-    label: 'Password',
-    name: 'password',
-    type: 'password'
-  }
-};
-
-export const Checkbox: Story = {
-  args: {
-    label: 'I aggreed!',
-    name: 'checkbox',
-    type: 'checkbox'
+    type: 'text',
+    list: [{ value: '1' }, { value: '2' }]
   }
 };

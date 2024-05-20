@@ -1,18 +1,22 @@
+import { ReactNode } from 'react';
+
 export type AbilityProviderProps = {
   /** Default abilities */
   list?: string[];
   /** Persistent abilities list with local storage */
   persistent?: boolean;
   /** Content */
-  children?: JSX.Element;
+  children?: ReactNode;
 };
 
 export interface CanProps {
   /** Ability name */
   i: string;
   /** Content */
-  children: JSX.Element;
+  children?: ReactNode;
 }
+
+export interface CannotProps extends CanProps {}
 
 export interface UseAbility {
   /** All abilities */

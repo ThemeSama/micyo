@@ -6,5 +6,6 @@ import Submit from './button/Submit';
 import Reset from './button/Reset';
 import Feedback from './feedback/Feedback';
 import useFormContext from './form/hooks/useFormContext';
+import Fieldset from './fieldset/Fieldset';
 
-export { Form, Label, Input, Button, Submit, Reset, Feedback, useFormContext };
+export { Form, Fieldset, Label, Input, Button, Submit, Reset, Feedback, useFormContext };

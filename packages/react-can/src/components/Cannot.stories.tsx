@@ -8,7 +8,7 @@ const meta = {
   title: 'react-can/Cannot',
   component: Cannot,
   decorators: [
-    (Story: StoryObj) => (
+    (Story) => (
       <AbilityProvider list={['READ_POST']} persistent={false}>
         <Story />
       </AbilityProvider>

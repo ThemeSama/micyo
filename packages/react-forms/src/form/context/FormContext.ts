@@ -1,8 +1,8 @@
 import { createContext } from 'react';
-import { UseFormReturn } from 'react-hook-form';
+import { FieldValues, FormState, UseFormReturn } from 'react-hook-form';
 
-type TFormContext = {
-  hookForm?: UseFormReturn;
+type TFormContext<TUseFormReturn extends UseFormReturn = UseFormReturn> = {
+  hookForm?: TUseFormReturn;
   schema?: any;
   columns?: number;
 };

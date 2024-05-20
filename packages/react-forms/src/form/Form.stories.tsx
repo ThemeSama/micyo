@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import Form from './Form';
 import Input from '../input/Input';
 import Submit from '../button/Submit';
@@ -8,6 +9,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import * as yup from 'yup';
+import Fieldset from '../fieldset/Fieldset';
+import Reset from '../button/Reset';
+import Checkbox from '../checkbox/Checkbox';
+import Textarea from '../textarea/Textarea';
 
 const meta: Meta<typeof Form> = {
   title: 'react-forms/Form',
@@ -15,6 +20,11 @@ const meta: Meta<typeof Form> = {
   tags: ['autodocs'],
   parameters: {
     layout: 'centered'
+  },
+  argTypes: {
+    onSubmit: { control: false },
+    method: { control: false },
+    schema: { control: false }
   }
 };
 
@@ -23,7 +33,9 @@ type Story = StoryObj<typeof Form>;
 
 const schema = yup.object().shape({
   username: yup.string().required(),
-  password: yup.string()
+  password: yup.string(),
+  hobbies: yup.array().required(),
+  bio: yup.string()
 });
 
 const schemaZod = z
@@ -38,18 +50,30 @@ const schemaZod = z
 export const YupValidation: Story = {
   render: () => {
     const { handleSubmit, register, ...form } = useForm({
-      resolver: yupResolver(schema)
+      resolver: yupResolver(schema),
+      defaultValues: { bio: 'test' }
     });
 
-    const onSubmit = (data: object) => {
-      console.log(data);
-    };
-
     return (
-      <Form onSubmit={handleSubmit(onSubmit)} schema={schema} {...form}>
+      <Form onSubmit={handleSubmit(action('Form submitted'))} schema={schema} {...form}>
         <Input label="User Name" {...register('username')} />
         <Input label="Password" type="password" {...register('password')} />
-        <Submit label="Send" />
+        <Checkbox
+          label="Hobbies"
+          list={[
+            {
+              label: 'Soccer',
+              value: 'soccer'
+            },
+            {
+              label: 'Games',
+              value: 'games'
+            }
+          ]}
+          {...register('hobbies')}
+        />
+        <Textarea label="Bio" {...register('bio')} />
+        <Submit label="Register" />
       </Form>
     );
   }
@@ -61,15 +85,30 @@ export const ZodValidation: Story = {
       resolver: zodResolver(schemaZod)
     });
 
-    const onSubmit = (data: object) => {
-      console.log(data);
-    };
-
     return (
-      <Form onSubmit={handleSubmit(onSubmit)} schema={schemaZod} {...form}>
+      <Form onSubmit={handleSubmit(action('Form submitted'))} schema={schemaZod} {...form}>
         <Input label="User Name" {...register('username')} />
         <Input label="Password" type="password" {...register('password')} />
         <Submit label="Send" />
+      </Form>
+    );
+  }
+};
+
+export const ColumnsConfiguration: Story = {
+  render: () => {
+    const { handleSubmit, register, ...form } = useForm({
+      values: { username: 'test', password: 'test' }
+    });
+
+    return (
+      <Form onSubmit={handleSubmit(action('Form submitted'))} {...form}>
+        <Fieldset legend="Login" columns={3}>
+          <Input label="User Name" colSpan={2} {...register('username')} />
+          <Input label="Password" type="password" {...register('password')} />
+        </Fieldset>
+        <Submit label="Send" />
+        <Reset label="Clear" onClick={action('Form reset')} />
       </Form>
     );
   }

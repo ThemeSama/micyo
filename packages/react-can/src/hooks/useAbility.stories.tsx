@@ -7,12 +7,13 @@ import useAbility from './useAbility';
 const meta: Meta<typeof useAbility> = {
   title: 'react-can/useAbility',
   decorators: [
-    (Story: StoryObj) => (
+    (Story) => (
       <AbilityProvider list={['READ_POST']} persistent={false}>
         <Story />
       </AbilityProvider>
     )
   ],
+  tags: ['!autodocs'],
   parameters: {
     layout: 'centered'
   }
