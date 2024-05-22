@@ -37,7 +37,8 @@ const schema = yup.object().shape({
   password: yup.string(),
   hobbies: yup.array().required(),
   bio: yup.string(),
-  gender: yup.array()
+  gender: yup.string(),
+  countries: yup.array().required()
 });
 
 const schemaZod = z
@@ -77,7 +78,6 @@ export const YupValidation: Story = {
         <Textarea label="Bio" {...register('bio')} />
         <Select
           label="Gender"
-          multiple={true}
           {...register('gender')}
           options={[
             {
@@ -87,6 +87,40 @@ export const YupValidation: Story = {
             {
               label: 'Female',
               value: 'female'
+            }
+          ]}
+        />
+        <Select
+          label="Countries"
+          multiple={true}
+          {...register('countries')}
+          options={[
+            {
+              label: 'Asia',
+              options: [
+                {
+                  label: 'Russia',
+                  value: 'russia'
+                },
+                {
+                  label: 'China',
+                  value: 'china'
+                }
+              ]
+            },
+            {
+              label: 'Europe',
+              options: [
+                {
+                  label: 'Italy',
+                  value: 'italy',
+                  selected: true
+                },
+                {
+                  label: 'Germany',
+                  value: 'germany'
+                }
+              ]
             }
           ]}
         />

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ReactNode } from 'react';
 
 export interface IOption {
-  value: string;
+  value?: string;
   selected?: boolean;
   children?: ReactNode;
 }

@@ -6,9 +6,10 @@ import Option from '../option/Option';
 
 export interface IList {
   label?: string;
-  value: string;
+  value?: string;
   selected?: boolean;
   text?: string;
+  options?: IList[];
 }
 
 export interface IDatalist {
