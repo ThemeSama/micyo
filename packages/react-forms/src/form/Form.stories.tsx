@@ -13,6 +13,7 @@ import Fieldset from '../fieldset/Fieldset';
 import Reset from '../button/Reset';
 import Checkbox from '../checkbox/Checkbox';
 import Textarea from '../textarea/Textarea';
+import Select from '../select/Select';
 
 const meta: Meta<typeof Form> = {
   title: 'react-forms/Form',
@@ -35,7 +36,9 @@ const schema = yup.object().shape({
   username: yup.string().required(),
   password: yup.string(),
   hobbies: yup.array().required(),
-  bio: yup.string()
+  bio: yup.string(),
+  gender: yup.string(),
+  countries: yup.array().required()
 });
 
 const schemaZod = z
@@ -73,6 +76,54 @@ export const YupValidation: Story = {
           {...register('hobbies')}
         />
         <Textarea label="Bio" {...register('bio')} />
+        <Select
+          label="Gender"
+          {...register('gender')}
+          options={[
+            {
+              label: 'Male',
+              value: 'male'
+            },
+            {
+              label: 'Female',
+              value: 'female'
+            }
+          ]}
+        />
+        <Select
+          label="Countries"
+          multiple={true}
+          {...register('countries')}
+          options={[
+            {
+              label: 'Asia',
+              options: [
+                {
+                  label: 'Russia',
+                  value: 'russia'
+                },
+                {
+                  label: 'China',
+                  value: 'china'
+                }
+              ]
+            },
+            {
+              label: 'Europe',
+              options: [
+                {
+                  label: 'Italy',
+                  value: 'italy',
+                  selected: true
+                },
+                {
+                  label: 'Germany',
+                  value: 'germany'
+                }
+              ]
+            }
+          ]}
+        />
         <Submit label="Register" />
       </Form>
     );

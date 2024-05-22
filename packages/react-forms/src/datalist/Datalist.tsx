@@ -2,11 +2,14 @@ import * as React from 'react';
 import { forwardRef, HTMLInputTypeAttribute } from 'react';
 import useFieldId from '../hooks/useFieldId';
 import Input from '../input/Input';
+import Option from '../option/Option';
 
-interface IList {
-  value: string;
+export interface IList {
+  label?: string;
+  value?: string;
   selected?: boolean;
   text?: string;
+  options?: IList[];
 }
 
 export interface IDatalist {
@@ -41,7 +44,7 @@ const Datalist = forwardRef<HTMLInputElement, IDatalist>(
         />
         <datalist id={listId}>
           {list.map(({ text, ...opt }) => (
-            <option {...opt}>{text}</option>
+            <Option {...opt}>{text}</Option>
           ))}
         </datalist>
       </>
