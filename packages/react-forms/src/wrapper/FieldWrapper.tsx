@@ -6,7 +6,7 @@ import { TColSpan } from '../types';
 
 interface IFieldWrapper {
   type?: string;
-  colSpan?: number;
+  colSpan?: TColSpan;
   className?: string;
   children: ReactNode;
 }
@@ -17,7 +17,9 @@ const StyledWrapper = styled.div<{ $colSpan: TColSpan }>`
 
 const FieldWrapper = ({ colSpan, className = '', type, children }: IFieldWrapper) => {
   return (
-    <StyledWrapper className={`micyo-${type}-field ${className}`} $colSpan={colSpan}>
+    <StyledWrapper
+      className={`micyo-field-wrapper micyo-${type}-field ${className}`}
+      $colSpan={colSpan}>
       {children}
     </StyledWrapper>
   );
