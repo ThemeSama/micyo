@@ -12,17 +12,18 @@ export interface IInput {
   className?: string;
   colSpan?: number;
   desc?: string;
+  datalist?: string;
   type?: HTMLInputTypeAttribute;
 }
 
 const Input = forwardRef<HTMLInputElement, IInput>(
-  ({ id, label, type = 'text', name, className, colSpan, desc, ...props }, ref) => {
+  ({ id, label, type = 'text', name, className, colSpan, desc, datalist, ...props }, ref) => {
     const fieldId = useFieldId(id);
 
     return (
       <FieldWrapper colSpan={colSpan} type={type} className={className}>
         <Label label={label} name={name} htmlFor={fieldId} />
-        <input ref={ref} id={fieldId} name={name} type={type} {...props} />
+        <input ref={ref} id={fieldId} name={name} type={type} list={datalist} {...props} />
         <Feedback name={name} desc={desc} />
       </FieldWrapper>
     );

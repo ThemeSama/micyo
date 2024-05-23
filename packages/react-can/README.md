@@ -112,4 +112,4 @@ export interface UseAbility {
 
 ## License
 
-Copyright (c) 2024 themesama and individual contributors. Licensed under MIT license, see [LICENSE](../../LICENSE.md) for the full license.
+Copyright (c) 2024 themesama and individual contributors. Licensed under MIT license, see [LICENSE](https://github.com/ThemeSama/micyo/tree/main/LICENSE.md) for the full license.

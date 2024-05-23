@@ -4,9 +4,10 @@ I have prepared the relevant repository to share the tools and libraries that I 
 
 ## Libraries
 
-- [@micyo/react-can](packages/react-can/README.md) | Simple authorisation library for React projects
+- [@micyo/react-forms](https://github.com/ThemeSama/micyo/tree/main/packages/react-forms/README.md) | Basic unstyled form elements for React projects
+- [@micyo/react-can](https://github.com/ThemeSama/micyo/tree/main/packages/react-can/README.md) | Simple authorisation library for React projects
 - @micyo/react-settings | Apply the global project settings of client's crosstabs.
 
 ## License
 
-Copyright (c) 2024 themesama and individual contributors. Licensed under MIT license, see [LICENSE](LICENSE.md) for the full license.
+Copyright (c) 2024 themesama and individual contributors. Licensed under MIT license, see [LICENSE](https://github.com/ThemeSama/micyo/tree/main/LICENSE.md) for the full license.

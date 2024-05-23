@@ -11,7 +11,26 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['react-can', ['About Library', 'AbilityProvider', '*', 'Changelog']]
+        order: [
+          'About Micyo',
+          'react-forms',
+          [
+            'About Library',
+            'Form',
+            'Fieldset',
+            'Input',
+            'Select',
+            'Datalist',
+            'Radio',
+            'Checkbox',
+            'Textarea',
+            'Submit',
+            '*',
+            'Changelog'
+          ],
+          'react-can',
+          ['About Library', 'AbilityProvider', '*', 'Changelog']
+        ]
       }
     }
   },

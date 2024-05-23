@@ -38,7 +38,7 @@ const Datalist = forwardRef<HTMLInputElement, IDatalist>(
           className={className}
           colSpan={colSpan}
           desc={desc}
-          list={listId}
+          datalist={listId}
           {...props}
           ref={ref}
         />
