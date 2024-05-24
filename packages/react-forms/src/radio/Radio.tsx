@@ -4,18 +4,20 @@ import Label from '../label/Label';
 import Feedback from '../feedback/Feedback';
 import useFieldId from '../hooks/useFieldId';
 import FieldWrapper from '../wrapper/FieldWrapper';
+import { BaseField } from '../types';
 
-export interface IRadio {
-  id?: string;
-  label?: string;
-  name?: string;
-  className?: string;
-  colSpan?: number;
+export interface IRadio extends BaseField {
+  /** Enable/Disable feedback details */
   feedback?: boolean;
+  /** Field value */
   value?: any;
+  /** Field's radio list */
   list?: IRadio[];
 }
 
+/**
+ * The radio component are generally used in radio groups—collections of radio buttons describing a set of related options.
+ */
 const Radio = forwardRef<HTMLInputElement, IRadio>(
   ({ id, label, name, className, colSpan, feedback = true, list, ...props }, ref) => {
     const fieldId = useFieldId(id);
@@ -28,9 +30,9 @@ const Radio = forwardRef<HTMLInputElement, IRadio>(
             <Radio
               key={radio?.value}
               ref={ref}
-              name={name}
               feedback={false}
               {...radio}
+              name={name}
               {...props}
             />
           ))}
