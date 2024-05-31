@@ -21,7 +21,7 @@ export interface BaseField {
   /** Field label */
   label?: string;
   /** Field name */
-  name: string;
+  name?: string;
   /** Field extra CSS selector */
   className?: string;
   /** Field responsive setting */

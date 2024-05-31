@@ -1,0 +1,138 @@
+.micyo-form {
+  --micyo-fields-gap: 0.75rem;
+
+  width: 20rem;
+}
+
+.micyo-fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--micyo-fields-gap);
+  border: none;
+  padding: 0 0 1rem;
+  margin: 0;
+  width: 20rem;
+}
+
+.micyo-fieldset:has(legend) {
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0;
+  border: 1px solid hsla(203, 50%, 30%, 0.15);
+  margin: 2rem 0 1rem;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.micyo-fieldset > legend {
+  padding: 3px 10px;
+  border: 1px solid hsla(203, 50%, 30%, 0.15);
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.micyo-field-wrapper {
+  --micyo-field-bg: #fff;
+  --micyo-accent-color: #029cfd;
+  --micyo-field-text-color: #2e3438;
+  --micyo-field-gap: 0.25rem;
+  --micyo-validation-error: #ff4400;
+
+  accent-color: var(--micyo-accent-color);
+}
+
+.micyo-field-wrapper:not(.micyo-checkbox-field, .micyo-radio-field) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--micyo-field-gap);
+}
+
+.micyo-field-wrapper > select,
+.micyo-field-wrapper > textarea,
+.micyo-field-wrapper:not(.micyo-checkbox-field, .micyo-radio-field) > input {
+  appearance: none;
+  border: none;
+  display: block;
+  margin: 0;
+  padding: 6px 10px;
+  color: var(--micyo-field-text-color);
+  border-radius: 4px;
+  line-height: 20px;
+  font-size: 0.875rem;
+  background-clip: padding-box;
+  background-color: var(--micyo-field-bg);
+  transition:
+    box-shadow 200ms ease-out,
+    opacity 200ms ease-out;
+  box-shadow: hsla(203, 50%, 30%, 0.15) 0 0 0 1px inset;
+}
+
+.micyo-field-wrapper > select:focus,
+.micyo-field-wrapper > textarea:focus,
+.micyo-field-wrapper:not(.micyo-checkbox-field, .micyo-radio-field) > input:focus {
+  box-shadow: #029cfd 0 0 0 1px inset;
+  outline: none;
+}
+
+.micyo-field-wrapper > select:not([multiple]) {
+  --micyo-select-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.micyo-field-wrapper > select {
+  background: var(--micyo-field-bg);
+  background-image: var(--micyo-select-icon);
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 16px 12px;
+}
+
+.micyo-radio-field,
+.micyo-checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: var(--micyo-field-gap);
+}
+
+.micyo-field-validation-feedback {
+  font-size: 0.875rem;
+  color: var(--micyo-validation-error);
+}
+
+.micyo-label > span {
+  padding: 0 0.15rem;
+  color: var(--micyo-validation-error);
+}
+
+.micyo-btn {
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  padding: 0 10px;
+  height: 28px;
+  text-align: center;
+  color: #2e3438;
+  box-shadow: #d9e8f2 0 0 0 1px inset;
+  border-radius: 4px;
+  flex-shrink: 0;
+  line-height: 1;
+  font-weight: 700;
+  white-space: nowrap;
+  background: #f6f9fc;
+  vertical-align: top;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease-out;
+  gap: 6px;
+  margin-right: 0.5rem;
+}
+
+.micyo-btn[type='reset'] {
+  background: #fff;
+}
+
+.micyo-btn:hover {
+  background: #eef4f9;
+}

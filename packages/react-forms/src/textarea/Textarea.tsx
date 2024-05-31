@@ -4,16 +4,13 @@ import Label from '../label/Label';
 import Feedback from '../feedback/Feedback';
 import useFieldId from '../hooks/useFieldId';
 import FieldWrapper from '../wrapper/FieldWrapper';
+import { BaseField } from '../types';
 
-export interface ITextarea {
-  id?: string;
-  label?: string;
-  name: string;
-  className?: string;
-  colSpan?: number;
-  desc?: string;
-}
+export interface ITextarea extends BaseField {}
 
+/**
+ * The Textarea component represents a multi-line plain-text editing control, useful when you want to allow users to enter a sizeable amount of free-form text, for example a comment on a review or feedback form.
+ */
 const Textarea = forwardRef<HTMLTextAreaElement, ITextarea>(
   ({ id, label, name, className, colSpan, desc, ...props }, ref) => {
     const fieldId = useFieldId(id);

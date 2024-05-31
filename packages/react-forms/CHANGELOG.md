@@ -1,5 +1,9 @@
 ## @micyo/react-forms changelog
 
-### 0.0.1
+### 1.0.1
+
+- Updated types and docs
+
+### 1.0.0
 
 - Initial release

@@ -59,71 +59,73 @@ export const YupValidation: Story = {
 
     return (
       <Form onSubmit={handleSubmit(action('Form submitted'))} schema={schema} {...form}>
-        <Input label="User Name" {...register('username')} />
-        <Input label="Password" type="password" {...register('password')} />
-        <Checkbox
-          label="Hobbies"
-          list={[
-            {
-              label: 'Soccer',
-              value: 'soccer'
-            },
-            {
-              label: 'Games',
-              value: 'games'
-            }
-          ]}
-          {...register('hobbies')}
-        />
-        <Textarea label="Bio" {...register('bio')} />
-        <Select
-          label="Gender"
-          {...register('gender')}
-          options={[
-            {
-              label: 'Male',
-              value: 'male'
-            },
-            {
-              label: 'Female',
-              value: 'female'
-            }
-          ]}
-        />
-        <Select
-          label="Countries"
-          multiple={true}
-          {...register('countries')}
-          options={[
-            {
-              label: 'Asia',
-              options: [
-                {
-                  label: 'Russia',
-                  value: 'russia'
-                },
-                {
-                  label: 'China',
-                  value: 'china'
-                }
-              ]
-            },
-            {
-              label: 'Europe',
-              options: [
-                {
-                  label: 'Italy',
-                  value: 'italy',
-                  selected: true
-                },
-                {
-                  label: 'Germany',
-                  value: 'germany'
-                }
-              ]
-            }
-          ]}
-        />
+        <Fieldset>
+          <Input label="User Name" {...register('username')} />
+          <Input label="Password" type="password" {...register('password')} />
+          <Checkbox
+            label="Hobbies"
+            list={[
+              {
+                label: 'Soccer',
+                value: 'soccer'
+              },
+              {
+                label: 'Games',
+                value: 'games'
+              }
+            ]}
+            {...register('hobbies')}
+          />
+          <Textarea label="Bio" {...register('bio')} />
+          <Select
+            label="Gender"
+            {...register('gender')}
+            options={[
+              {
+                label: 'Male',
+                value: 'male'
+              },
+              {
+                label: 'Female',
+                value: 'female'
+              }
+            ]}
+          />
+          <Select
+            label="Countries"
+            multiple={true}
+            {...register('countries')}
+            options={[
+              {
+                label: 'Asia',
+                options: [
+                  {
+                    label: 'Russia',
+                    value: 'russia'
+                  },
+                  {
+                    label: 'China',
+                    value: 'china'
+                  }
+                ]
+              },
+              {
+                label: 'Europe',
+                options: [
+                  {
+                    label: 'Italy',
+                    value: 'italy',
+                    selected: true
+                  },
+                  {
+                    label: 'Germany',
+                    value: 'germany'
+                  }
+                ]
+              }
+            ]}
+          />
+        </Fieldset>
         <Submit label="Register" />
       </Form>
     );
