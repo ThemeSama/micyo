@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: content-box;
+}
+
 body {
   font-family:
     'Nunito Sans',

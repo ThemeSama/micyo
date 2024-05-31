@@ -4,16 +4,9 @@ import Label from '../label/Label';
 import Feedback from '../feedback/Feedback';
 import useFieldId from '../hooks/useFieldId';
 import FieldWrapper from '../wrapper/FieldWrapper';
-import { TColSpan } from '../types';
+import { BaseField, TColSpan } from '../types';
 
-export interface ICheckbox {
-  id?: string;
-  /** Checkbox or checbox group label */
-  label?: string;
-  name?: string;
-  className?: string;
-  /** Column size for responsive design */
-  colSpan?: TColSpan;
+export interface ICheckbox extends BaseField {
   /** Enable/Disable feedback messages */
   feedback?: boolean;
   value?: any;
@@ -22,7 +15,7 @@ export interface ICheckbox {
 }
 
 /**
- * Single checkbox or group checkboxes
+ * Checkboxes are used to let a user select one or more options of a limited number of choices.
  */
 const Checkbox = forwardRef<HTMLInputElement, ICheckbox>(
   ({ id, label, name, className, colSpan, feedback = true, list, ...props }, ref) => {
@@ -36,10 +29,10 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckbox>(
             <Checkbox
               key={radio?.value}
               ref={ref}
-              name={name}
               feedback={false}
               {...radio}
               {...props}
+              name={name}
             />
           ))}
           {feedback && <Feedback name={name} />}
