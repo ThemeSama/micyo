@@ -7,14 +7,10 @@ import { IList } from '../datalist/Datalist';
 import Option from '../option/Option';
 import OptionGroup from '../option/OptionGroup';
 import Feedback from '../feedback/Feedback';
+import { BaseField } from '../types';
 
-interface ISelect {
-  id?: string;
-  label?: string;
-  name: string;
-  className?: string;
-  colSpan?: number;
-  desc?: string;
+interface ISelect extends BaseField {
+  multiple?: boolean;
   options?: IList[];
   children?: ReactNode;
 }
