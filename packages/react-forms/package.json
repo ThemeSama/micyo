@@ -1,6 +1,6 @@
 {
   "name": "@micyo/react-forms",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple and clear form implementation with React Hook Forms",
   "type": "module",
   "types": "dist/legacy/index.d.ts",

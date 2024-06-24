@@ -60,7 +60,7 @@ export const YupValidation: Story = {
     return (
       <Form onSubmit={handleSubmit(action('Form submitted'))} schema={schema} {...form}>
         <Fieldset>
-          <Input label="User Name" {...register('username')} />
+          <Input label="User Name" {...register('username')} desc="Choose a username" />
           <Input label="Password" type="password" {...register('password')} />
           <Checkbox
             label="Hobbies"
@@ -74,6 +74,7 @@ export const YupValidation: Story = {
                 value: 'games'
               }
             ]}
+            desc="Choose one or more hobbies"
             {...register('hobbies')}
           />
           <Textarea label="Bio" {...register('bio')} />

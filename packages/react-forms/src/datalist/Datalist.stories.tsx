@@ -40,9 +40,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    label: 'User Name',
-    name: 'username',
+    label: 'Choose a flavor',
+    name: 'flavor',
     type: 'text',
-    list: [{ value: '1' }, { value: '2' }]
+    list: [
+      { value: 'Chocolate' },
+      { value: 'Coconut' },
+      { value: 'Mint' },
+      { value: 'Strawberry' },
+      { value: 'Vanilla' }
+    ]
   }
 };

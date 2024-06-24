@@ -19,7 +19,7 @@ export interface IRadio extends BaseField {
  * The radio component are generally used in radio groups—collections of radio buttons describing a set of related options.
  */
 const Radio = forwardRef<HTMLInputElement, IRadio>(
-  ({ id, label, name, className, colSpan, feedback = true, list, ...props }, ref) => {
+  ({ id, label, name, className, colSpan, feedback = true, desc, list, ...props }, ref) => {
     const fieldId = useFieldId(id);
 
     if (Array.isArray(list) && list.length) {
@@ -36,7 +36,7 @@ const Radio = forwardRef<HTMLInputElement, IRadio>(
               {...props}
             />
           ))}
-          {feedback && <Feedback name={name} />}
+          {feedback && <Feedback name={name} desc={desc} />}
         </FieldWrapper>
       );
     }
@@ -45,7 +45,7 @@ const Radio = forwardRef<HTMLInputElement, IRadio>(
       <FieldWrapper colSpan={colSpan} type="radio" className={className}>
         <input ref={ref} id={fieldId} name={name} type="radio" {...props} />
         <Label label={label} htmlFor={fieldId} />
-        {feedback && <Feedback name={name} />}
+        {feedback && <Feedback name={name} desc={desc} />}
       </FieldWrapper>
     );
   }

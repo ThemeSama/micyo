@@ -16,16 +16,20 @@ type Story = StoryObj<typeof meta>;
 
 export const RadioList: Story = {
   args: {
-    name: 'hobbies',
-    label: 'Hobbies',
+    name: 'drone',
+    label: 'Select a maintenance drone',
     list: [
       {
-        label: 'Soccer',
-        value: 'soccer'
+        label: 'Huey',
+        value: 'huey'
       },
       {
-        label: 'Games',
-        value: 'games'
+        label: 'Dewey',
+        value: 'dewey'
+      },
+      {
+        label: 'Louie',
+        value: 'louie'
       }
     ]
   }

@@ -18,7 +18,7 @@ export interface ICheckbox extends BaseField {
  * Checkboxes are used to let a user select one or more options of a limited number of choices.
  */
 const Checkbox = forwardRef<HTMLInputElement, ICheckbox>(
-  ({ id, label, name, className, colSpan, feedback = true, list, ...props }, ref) => {
+  ({ id, label, name, className, colSpan, feedback = true, desc, list, ...props }, ref) => {
     const fieldId = useFieldId(id);
 
     if (Array.isArray(list) && list.length) {
@@ -35,7 +35,7 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckbox>(
               name={name}
             />
           ))}
-          {feedback && <Feedback name={name} />}
+          {feedback && <Feedback name={name} desc={desc} />}
         </FieldWrapper>
       );
     }
@@ -44,7 +44,7 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckbox>(
       <FieldWrapper colSpan={colSpan} type="checkbox" className={className}>
         <input ref={ref} id={fieldId} name={name} type="checkbox" {...props} />
         <Label label={label} htmlFor={fieldId} />
-        {feedback && <Feedback name={name} />}
+        {feedback && <Feedback name={name} desc={desc} />}
       </FieldWrapper>
     );
   }
