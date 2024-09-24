@@ -1,0 +1,62 @@
+{
+  "name": "@micyo/react-wp-query",
+  "version": "1.0.0",
+  "description": "WordPress REST API React implementations",
+  "type": "module",
+  "types": "dist/legacy/index.d.ts",
+  "main": "dist/legacy/index.cjs",
+  "module": "dist/legacy/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/modern/index.d.ts",
+        "default": "./dist/modern/index.js"
+      },
+      "require": {
+        "types": "./dist/modern/index.d.cts",
+        "default": "./dist/modern/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThemeSama/micyo.git",
+    "directory": "packages/react-wp-query"
+  },
+  "keywords": [
+    "react",
+    "wordpress",
+    "WordPress",
+    "rest",
+    "wp_query",
+    "query",
+    "posts",
+    "pages"
+  ],
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "author": "themesama",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ThemeSama/micyo/issues"
+  },
+  "homepage": "https://github.com/ThemeSama/micyo#readme",
+  "peerDependencies": {
+    "@tanstack/react-query": "^5.51.23",
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@tanstack/react-query": "^5.51.23",
+    "@types/react": "^18.3.1",
+    "@types/styled-components": "^5.1.34",
+    "react": "^18.3.1",
+    "styled-components": "^6.1.11"
+  }
+}
