@@ -1,88 +1,57 @@
-import { QueryKey, useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { useCallback, useMemo, useState } from 'react';
 import useSettings from './useSettings';
-
-interface IQuery {
-  id?: number;
-  page?: number;
-  per_page?: number;
-  offset?: number;
-  queryKey?: QueryKey;
-  enabled?: boolean;
-}
-
-export interface HPosts extends IQuery {}
+import { TPost, TPostsPagination, IPosts, IPostsQueryResults } from '../types';
 
 const usePosts = ({
   id,
   queryKey = ['posts'],
   enabled = true,
-  page = 1,
-  per_page,
-  offset
-}: HPosts) => {
+  queryArgs
+}: IPosts): IPostsQueryResults => {
   const { api } = useSettings();
 
   const [headers, setHeaders] = useState<Headers>();
 
-  const pagination = useMemo(() => {
-    if (headers && headers.get('x-wp-total') && headers.get('x-wp-totalpages')) {
-      const total = headers.get('x-wp-total') !== null ? Number(headers.get('x-wp-total')) : 1,
-        pages =
-          headers.get('x-wp-totalpages') !== null ? Number(headers.get('x-wp-totalpages')) : 1;
+  const pagination: TPostsPagination = useMemo(() => {
+    let total: number = 1,
+      pages: number = 1;
 
-      return {
-        page,
-        pages,
-        total,
-        hasNext: pages > page,
-        hasPrev: page > 1,
-        per_page,
-        offset
-      };
+    if (headers && headers.get('x-wp-total') && headers.get('x-wp-totalpages')) {
+      total = headers.get('x-wp-total') !== null ? Number(headers.get('x-wp-total')) : 1;
+      pages = headers.get('x-wp-totalpages') !== null ? Number(headers.get('x-wp-totalpages')) : 1;
     }
 
     return {
-      page,
-      pages: 1,
-      total: 1,
-      hasNext: false,
-      hasPrev: false,
-      per_page,
-      offset
+      pages,
+      total,
+      hasNext: queryArgs?.page ? pages > queryArgs.page : false,
+      hasPrev: queryArgs?.page ? queryArgs.page > 1 : false,
+      ...queryArgs
     };
-  }, [headers, page, per_page, offset]);
+  }, [headers, queryArgs]);
 
   const queryParams = useMemo(() => {
-    const params = new URLSearchParams();
-
-    params.append('page', String(page));
-    if (per_page) {
-      params.append('per_page', String(per_page));
-    }
-
-    if (offset) {
-      params.append('offset', String(offset));
-    }
+    const params = new URLSearchParams(queryArgs);
 
     return params;
-  }, [page, per_page, offset]);
+  }, [queryArgs]);
 
-  const posts = useQuery({
-    queryKey: [page, per_page, offset, ...queryKey],
+  const posts: UseQueryResult = useQuery({
+    queryKey: [...queryParams, ...queryKey],
     enabled: enabled && !id ? true : false,
-    queryFn: async ({ signal }) => {
+    queryFn: async ({ signal }): Promise<TPost[]> => {
       const response = await fetch(`${api}/posts?${queryParams}`, { signal });
       setHeaders(() => response.headers);
       return response.json();
     }
   });
 
-  const post = useQuery({
-    queryKey: [`post-${id}`, ...queryKey],
+  const post: UseQueryResult = useQuery({
+    queryKey: [`post-${id}`, ...queryParams, ...queryKey],
     enabled: id ? true : false,
-    queryFn: async ({ signal }) => {
-      const response = await fetch(`${api}/posts/${id}`, { signal });
+    queryFn: async ({ signal }): Promise<TPost> => {
+      const response = await fetch(`${api}/posts/${id}?${queryParams}`, { signal });
       setHeaders(response.headers);
       return response.json();
     }

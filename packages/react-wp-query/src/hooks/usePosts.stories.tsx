@@ -3,8 +3,9 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import usePosts from './usePosts';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { TPosts } from '../types';
+import { TPost } from '../types';
 import { WPProvider } from '../context/WPProvider';
+import Post from '../components/Post';
 
 const meta: Meta<typeof usePosts> = {
   title: 'react-wp-query/usePosts',
@@ -13,7 +14,7 @@ const meta: Meta<typeof usePosts> = {
       const queryClient = new QueryClient();
 
       return (
-        <WPProvider api="https://wordpress.org/news/wp-json/wp/v2">
+        <WPProvider api="https://localhost:8443/wp-json/wp/v2">
           <QueryClientProvider client={queryClient}>
             <Story />
           </QueryClientProvider>
@@ -22,31 +23,102 @@ const meta: Meta<typeof usePosts> = {
     }
   ],
   parameters: {
-    layout: 'centered'
+    layout: 'padded'
   }
 };
 
 export default meta;
 type Story = StoryObj<typeof usePosts>;
 
-export const List: Story = {
+export const Posts: Story = {
   render: () => {
     const [page, setPage] = React.useState(1);
-    const { posts, pagination } = usePosts({ page, per_page: 3 });
+    const { posts, pagination } = usePosts({ queryArgs: { page, per_page: 3 } });
 
     return posts?.isLoading ? (
       <>Loading...</>
     ) : (
       <>
-        <ul>
-          {posts?.data?.length &&
-            posts?.data?.map((post: TPosts) => (
-              <li key={`posts-${post.id}`}>
-                <h3 dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
-                <div dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
-              </li>
-            ))}
-        </ul>
+        {Array.isArray(posts?.data) &&
+          posts?.data?.length &&
+          posts?.data?.map((post: TPost) => (
+            <Post key={`posts-${post.id}`} post={post} excerpt={true} />
+          ))}
+
+        <button onClick={() => setPage((p) => p - 1)} disabled={!pagination.hasPrev}>
+          Prev Page
+        </button>
+        <input
+          value={page}
+          type="number"
+          max={pagination.pages}
+          min={1}
+          onChange={(e) => setPage(Number(e.target.value))}
+        />
+        <button onClick={() => setPage((p) => p + 1)} disabled={!pagination.hasNext}>
+          Next Page
+        </button>
+        <pre>
+          Current Page: {pagination.page} / Total Pages: {pagination.pages} / Per Page:{' '}
+          {pagination.per_page} / Total: {pagination.total}
+        </pre>
+      </>
+    );
+  }
+};
+
+export const AuthorPosts: Story = {
+  render: () => {
+    const [page, setPage] = React.useState(1);
+    const { posts, pagination } = usePosts({ queryArgs: { page, per_page: 3, author: 1 } });
+    const { data, isLoading } = posts;
+
+    return isLoading ? (
+      <>Loading...</>
+    ) : (
+      <>
+        {Array.isArray(data) &&
+          data?.length &&
+          data?.map((post: TPost) => <Post key={`posts-${post.id}`} post={post} excerpt={true} />)}
+
+        <button onClick={() => setPage((p) => p - 1)} disabled={!pagination.hasPrev}>
+          Prev Page
+        </button>
+        <input
+          value={page}
+          type="number"
+          max={pagination.pages}
+          min={1}
+          onChange={(e) => setPage(Number(e.target.value))}
+        />
+        <button onClick={() => setPage((p) => p + 1)} disabled={!pagination.hasNext}>
+          Next Page
+        </button>
+        <pre>
+          Current Page: {pagination.page} / Total Pages: {pagination.pages} / Per Page:{' '}
+          {pagination.per_page} / Total: {pagination.total}
+        </pre>
+      </>
+    );
+  }
+};
+
+export const CategoryFilteredPosts: Story = {
+  render: () => {
+    const [page, setPage] = React.useState(1);
+    const { posts, pagination } = usePosts({
+      queryArgs: { page, per_page: 3, categories: [2, 7] }
+    });
+    const { data, isLoading } = posts;
+
+    return isLoading ? (
+      <>Loading...</>
+    ) : (
+      <>
+        {Array.isArray(data) &&
+          data?.length &&
+          data?.map((post: TPost) => <Post key={`posts-${post.id}`} post={post} excerpt={true} />)}
+
         <button onClick={() => setPage((p) => p - 1)} disabled={!pagination.hasPrev}>
           Prev Page
         </button>
@@ -71,14 +143,27 @@ export const List: Story = {
 
 export const Single: Story = {
   render: () => {
-    const { post } = usePosts({ id: 203 });
+    const { post } = usePosts({ id: 1 }),
+      { data, isLoading } = post;
 
-    return post?.isLoading ? (
+    return isLoading ? <>Loading...</> : <Post post={data} />;
+  }
+};
+
+export const PasswordProtectedPost: Story = {
+  render: () => {
+    const [password, setPassword] = React.useState('');
+    const { post } = usePosts({ id: 1168, queryArgs: { password } });
+    const { data, isLoading } = post;
+
+    return isLoading ? (
       <>Loading...</>
     ) : (
       <>
-        <h1 dangerouslySetInnerHTML={{ __html: post?.data?.title?.rendered }} />
-        <div dangerouslySetInnerHTML={{ __html: post?.data?.content?.rendered }} />
+        <h1 dangerouslySetInnerHTML={{ __html: data?.title?.rendered || '' }} />
+        <div dangerouslySetInnerHTML={{ __html: data?.date || '' }} />
+        <div dangerouslySetInnerHTML={{ __html: data?.content?.rendered || '' }} />
+        {!password && <button onClick={() => setPassword('enter')}>Open Content</button>}
       </>
     );
   }

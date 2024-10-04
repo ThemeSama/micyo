@@ -46,6 +46,7 @@
   },
   "scripts": {
     "storybook": "storybook dev -p 6006",
+    "storybook-https": "storybook dev -p 6006 --https --ssl-cert ./localhost.crt --ssl-key ./localhost.key",
     "build-storybook": "storybook build"
   }
 }
