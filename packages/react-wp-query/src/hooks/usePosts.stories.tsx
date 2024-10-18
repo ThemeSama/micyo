@@ -3,9 +3,13 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import usePosts from './usePosts';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { TPost } from '../types';
+import { TPost } from '../types/posts';
 import { WPProvider } from '../context/WPProvider';
 import Post from '../components/Post';
+import Excerpt from '../components/Excerpt';
+import Title from '../components/Title';
+import Content from '../components/Content';
+import PostMeta from '../components/Meta';
 
 const meta: Meta<typeof usePosts> = {
   title: 'react-wp-query/usePosts',
@@ -33,16 +37,26 @@ type Story = StoryObj<typeof usePosts>;
 export const Posts: Story = {
   render: () => {
     const [page, setPage] = React.useState(1);
-    const { posts, pagination } = usePosts({ queryArgs: { page, per_page: 3 } });
+    const { posts, pagination } = usePosts({
+      queryArgs: {
+        page,
+        per_page: 3,
+        _embed: ['author', 'wp:term'],
+        _fields: ['id', 'title', 'excerpt', '_embedded', '_links']
+      }
+    });
 
     return posts?.isLoading ? (
       <>Loading...</>
     ) : (
       <>
         {Array.isArray(posts?.data) &&
-          posts?.data?.length &&
           posts?.data?.map((post: TPost) => (
-            <Post key={`posts-${post.id}`} post={post} excerpt={true} />
+            <Post key={`posts-${post.id}`} post={post}>
+              <Title />
+              <PostMeta />
+              <Excerpt />
+            </Post>
           ))}
 
         <button onClick={() => setPage((p) => p - 1)} disabled={!pagination.hasPrev}>
@@ -70,7 +84,7 @@ export const Posts: Story = {
 export const AuthorPosts: Story = {
   render: () => {
     const [page, setPage] = React.useState(1);
-    const { posts, pagination } = usePosts({ queryArgs: { page, per_page: 3, author: 1 } });
+    const { posts, pagination } = usePosts({ queryArgs: { page, per_page: 3, author: 2 } });
     const { data, isLoading } = posts;
 
     return isLoading ? (
@@ -78,8 +92,12 @@ export const AuthorPosts: Story = {
     ) : (
       <>
         {Array.isArray(data) &&
-          data?.length &&
-          data?.map((post: TPost) => <Post key={`posts-${post.id}`} post={post} excerpt={true} />)}
+          data?.map((post: TPost) => (
+            <Post key={`posts-${post.id}`} post={post}>
+              <Title />
+              <Excerpt />
+            </Post>
+          ))}
 
         <button onClick={() => setPage((p) => p - 1)} disabled={!pagination.hasPrev}>
           Prev Page
@@ -117,7 +135,12 @@ export const CategoryFilteredPosts: Story = {
       <>
         {Array.isArray(data) &&
           data?.length &&
-          data?.map((post: TPost) => <Post key={`posts-${post.id}`} post={post} excerpt={true} />)}
+          data?.map((post: TPost) => (
+            <Post key={`posts-${post.id}`} post={post}>
+              <Title />
+              <Excerpt />
+            </Post>
+          ))}
 
         <button onClick={() => setPage((p) => p - 1)} disabled={!pagination.hasPrev}>
           Prev Page
@@ -143,10 +166,18 @@ export const CategoryFilteredPosts: Story = {
 
 export const Single: Story = {
   render: () => {
-    const { post } = usePosts({ id: 1 }),
-      { data, isLoading } = post;
+    const { post } = usePosts({ id: 1148, queryArgs: { _embed: true } });
+    const data = post.data as TPost;
 
-    return isLoading ? <>Loading...</> : <Post post={data} />;
+    return post.isLoading ? (
+      <>Loading...</>
+    ) : (
+      <Post post={data}>
+        <Title />
+        <PostMeta />
+        <Content />
+      </Post>
+    );
   }
 };
 
@@ -154,17 +185,16 @@ export const PasswordProtectedPost: Story = {
   render: () => {
     const [password, setPassword] = React.useState('');
     const { post } = usePosts({ id: 1168, queryArgs: { password } });
-    const { data, isLoading } = post;
+    const data = post.data as TPost;
 
-    return isLoading ? (
+    return post.isLoading ? (
       <>Loading...</>
     ) : (
-      <>
-        <h1 dangerouslySetInnerHTML={{ __html: data?.title?.rendered || '' }} />
-        <div dangerouslySetInnerHTML={{ __html: data?.date || '' }} />
-        <div dangerouslySetInnerHTML={{ __html: data?.content?.rendered || '' }} />
+      <Post post={data}>
+        <Title />
+        <Content />
         {!password && <button onClick={() => setPassword('enter')}>Open Content</button>}
-      </>
+      </Post>
     );
   }
 };

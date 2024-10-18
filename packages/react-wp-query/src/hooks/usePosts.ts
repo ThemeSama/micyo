@@ -1,7 +1,7 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { useCallback, useMemo, useState } from 'react';
 import useSettings from './useSettings';
-import { TPost, TPostsPagination, IPosts, IPostsQueryResults } from '../types';
+import { TPost, TPostsPagination, IPosts, IPostsQueryResults } from '../types/posts';
 
 const usePosts = ({
   id,
@@ -37,7 +37,7 @@ const usePosts = ({
     return params;
   }, [queryArgs]);
 
-  const posts: UseQueryResult = useQuery({
+  const posts = useQuery({
     queryKey: [...queryParams, ...queryKey],
     enabled: enabled && !id ? true : false,
     queryFn: async ({ signal }): Promise<TPost[]> => {
@@ -47,7 +47,7 @@ const usePosts = ({
     }
   });
 
-  const post: UseQueryResult = useQuery({
+  const post = useQuery({
     queryKey: [`post-${id}`, ...queryParams, ...queryKey],
     enabled: id ? true : false,
     queryFn: async ({ signal }): Promise<TPost> => {

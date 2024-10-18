@@ -1,40 +1,30 @@
-import { QueryKey, UseQueryResult } from '@tanstack/react-query';
-
-export type TRendered = {
-  rendered: string;
-};
-
-export type TTitle = TRendered & {};
-export type TContent = TRendered & {
-  protected: boolean;
-};
-export type TExcerpt = TRendered & {
-  protected: boolean;
-};
-export type TGuid = TRendered & {};
+import { UseQueryResult } from '@tanstack/react-query';
+import { TContent, TExcerpt, TGuid, TTitle } from './extras';
+import { IQuery } from './query';
+import { TEmbedded } from './embedded';
 
 /**
  * Post Type
  */
 export type TPost = {
-  date: string | null;
-  date_gmt: string | null;
-  guid: TGuid;
-  id: number;
-  link: string;
-  modified: string;
-  modified_gmt: string;
-  slug: string;
-  status: 'publish' | 'future' | 'draft' | 'pending' | 'private';
-  type: string;
-  title: TTitle;
-  content: TContent;
-  author: number;
-  excerpt: TExcerpt;
-  featured_media: number;
-  comment_status: 'open' | 'closed';
-  ping_status: 'open' | 'closed';
-  format:
+  date?: string | null;
+  date_gmt?: string | null;
+  guid?: TGuid;
+  id?: number;
+  link?: string;
+  modified?: string;
+  modified_gmt?: string;
+  slug?: string;
+  status?: 'publish' | 'future' | 'draft' | 'pending' | 'private';
+  type?: string;
+  title?: TTitle;
+  content?: TContent;
+  author?: number;
+  excerpt?: TExcerpt;
+  featured_media?: number;
+  comment_status?: 'open' | 'closed';
+  ping_status?: 'open' | 'closed';
+  format?:
     | 'standard'
     | 'aside'
     | 'chat'
@@ -45,11 +35,12 @@ export type TPost = {
     | 'status'
     | 'video'
     | 'audio';
-  meta: object;
-  sticky: boolean;
-  template: string;
-  categories: number[];
-  tags: number[];
+  meta?: object;
+  sticky?: boolean;
+  template?: string;
+  categories?: number[];
+  tags?: number[];
+  _embedded?: TEmbedded;
 };
 
 export type TPostsArgs = {
@@ -91,24 +82,6 @@ export type TPostsArgs = {
   [key: string]: any;
 };
 
-export type TPostsPagination = TPostsArgs & {
-  pages: number;
-  total: number;
-  hasNext: boolean;
-  hasPrev: boolean;
-};
-
-export interface UseSettings {
-  api: string;
-}
-
-export interface IQuery {
-  id?: number;
-  queryKey?: QueryKey;
-  enabled?: boolean;
-  queryArgs?: TPostsArgs;
-}
-
 export interface IPosts extends IQuery {}
 
 export interface IPostsQueryResults {
@@ -120,3 +93,10 @@ export interface IPostsQueryResults {
   updatePost: Function;
   deletePost: Function;
 }
+
+export type TPostsPagination = TPostsArgs & {
+  pages: number;
+  total: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+};
