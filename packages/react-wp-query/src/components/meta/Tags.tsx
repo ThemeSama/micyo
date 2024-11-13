@@ -2,18 +2,18 @@ import * as React from 'react';
 import usePost from '../../hooks/usePost';
 import useSettings from '../../hooks/useSettings';
 
-const Categories = ({ className = '' }) => {
+const Tags = ({ className = '' }) => {
   const { clickEvent } = useSettings();
   const { _embedded } = usePost(),
-    term = _embedded ? _embedded['wp:term']?.flat()?.filter((t) => t.taxonomy === 'category') : [];
+    term = _embedded ? _embedded['wp:term']?.flat()?.filter((t) => t.taxonomy === 'post_tag') : [];
 
   return term ? (
-    <ul className={`micyo-categories-meta ${className}`}>
+    <ul className={`micyo-tags-meta ${className}`}>
       {term.map((t) => (
         <li key={t.id}>
           <a
             href={t.link}
-            onClick={(event) => clickEvent && clickEvent({ event, values: t, type: 'category' })}>
+            onClick={(event) => clickEvent && clickEvent({ event, values: t, type: 'tag' })}>
             {t.name}
           </a>
         </li>
@@ -22,4 +22,4 @@ const Categories = ({ className = '' }) => {
   ) : null;
 };
 
-export default Categories;
+export default Tags;

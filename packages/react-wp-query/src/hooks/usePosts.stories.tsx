@@ -10,15 +10,21 @@ import Excerpt from '../components/Excerpt';
 import Title from '../components/Title';
 import Content from '../components/Content';
 import PostMeta from '../components/Meta';
+import FeaturedImage from '../components/FeaturedImage';
+import { TClickArgs } from '../types/extras';
 
 const meta: Meta<typeof usePosts> = {
   title: 'react-wp-query/usePosts',
   decorators: [
     (Story) => {
       const queryClient = new QueryClient();
+      const clickEvent = React.useCallback(({ event, type, values }: TClickArgs) => {
+        event.preventDefault();
+        console.log(type, values);
+      }, []);
 
       return (
-        <WPProvider api="https://localhost:8443/wp-json/wp/v2">
+        <WPProvider api="https://localhost:8443/wp-json/wp/v2" clickEvent={clickEvent}>
           <QueryClientProvider client={queryClient}>
             <Story />
           </QueryClientProvider>
@@ -42,7 +48,7 @@ export const Posts: Story = {
         page,
         per_page: 3,
         _embed: ['author', 'wp:term'],
-        _fields: ['id', 'title', 'excerpt', '_embedded', '_links']
+        _fields: ['id', 'title', 'date', 'excerpt', '_embedded', '_links']
       }
     });
 
@@ -84,7 +90,7 @@ export const Posts: Story = {
 export const AuthorPosts: Story = {
   render: () => {
     const [page, setPage] = React.useState(1);
-    const { posts, pagination } = usePosts({ queryArgs: { page, per_page: 3, author: 2 } });
+    const { posts, pagination } = usePosts({ queryArgs: { page, per_page: 3, author: 1 } });
     const { data, isLoading } = posts;
 
     return isLoading ? (
@@ -125,7 +131,7 @@ export const CategoryFilteredPosts: Story = {
   render: () => {
     const [page, setPage] = React.useState(1);
     const { posts, pagination } = usePosts({
-      queryArgs: { page, per_page: 3, categories: [2, 7] }
+      queryArgs: { page, per_page: 3, categories: [2, 5, 7] }
     });
     const { data, isLoading } = posts;
 
@@ -166,13 +172,31 @@ export const CategoryFilteredPosts: Story = {
 
 export const Single: Story = {
   render: () => {
-    const { post } = usePosts({ id: 1148, queryArgs: { _embed: true } });
+    const { post } = usePosts({ id: 18066, queryArgs: { _embed: true } });
     const data = post.data as TPost;
 
     return post.isLoading ? (
       <>Loading...</>
     ) : (
       <Post post={data}>
+        <Title />
+        <PostMeta />
+        <Content />
+      </Post>
+    );
+  }
+};
+
+export const PostFeaturedImage: Story = {
+  render: () => {
+    const { post } = usePosts({ id: 12879, queryArgs: { _embed: true } });
+    const data = post.data as TPost;
+
+    return post.isLoading ? (
+      <>Loading...</>
+    ) : (
+      <Post post={data}>
+        <FeaturedImage />
         <Title />
         <PostMeta />
         <Content />

@@ -1,13 +1,20 @@
 import * as React from 'react';
 import usePost from '../../hooks/usePost';
 import { TUsers } from '../../types/users';
+import useSettings from '../../hooks/useSettings';
 
-const Author = () => {
+const Author = ({ className = '' }) => {
+  const { clickEvent } = useSettings();
   const { _embedded } = usePost();
   return _embedded?.author ? (
-    <div>
+    <div className={`micyo-author-meta ${className}`}>
       {_embedded.author.map((_author: TUsers) => (
-        <div>{_author.name}</div>
+        <a
+          key={`author-${_author.id}`}
+          href={_author.link}
+          onClick={(event) => clickEvent && clickEvent({ event, values: _author, type: 'author' })}>
+          {_author.name}
+        </a>
       ))}
     </div>
   ) : null;

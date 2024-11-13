@@ -14,6 +14,8 @@ const preview: Preview = {
       storySort: {
         order: [
           'About Micyo',
+          'react-wp-query',
+          ['About Library', '*', 'Changelog'],
           'react-forms',
           [
             'About Library',

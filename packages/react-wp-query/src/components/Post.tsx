@@ -4,14 +4,19 @@ import { PostProvider } from '../context/PostProvider';
 
 type TSinglePost = {
   post: TPost;
+  className?: string;
   children: React.ReactNode;
 };
 
 /**
  * Single Post
  */
-const Post = ({ post, children }: TSinglePost) => {
-  return <PostProvider post={post}>{children}</PostProvider>;
+const Post = ({ post, className = '', children }: TSinglePost) => {
+  return (
+    <PostProvider post={post}>
+      <article className={`micyo-article ${className}`}>{children}</article>
+    </PostProvider>
+  );
 };
 
 export default Post;

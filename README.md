@@ -4,6 +4,7 @@ I have prepared the relevant repository to share the tools and libraries that I 
 
 ## Libraries
 
+- [@micyo/react-wp-query](https://github.com/ThemeSama/micyo/tree/main/packages/react-wp-query/README.md) | Create a WordPress website with React Hooks
 - [@micyo/react-forms](https://github.com/ThemeSama/micyo/tree/main/packages/react-forms/README.md) | Basic unstyled form elements for React projects
 - [@micyo/react-can](https://github.com/ThemeSama/micyo/tree/main/packages/react-can/README.md) | Simple authorisation library for React projects
 - @micyo/react-settings | Apply the global project settings of client's crosstabs.

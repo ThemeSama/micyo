@@ -1,3 +1,5 @@
+import { MouseEvent } from 'react';
+
 export type TRendered = {
   rendered: string;
 };
@@ -14,8 +16,19 @@ export type TExcerpt = TRendered & {
 
 export type TGuid = TRendered & {};
 
+export type TCaption = TRendered & {};
+
+export type TClickArgs = {
+  event: MouseEvent;
+  values: any;
+  type: 'author' | 'category' | 'tag';
+};
+
+export type TClickEvent = (args: TClickArgs) => void;
+
 export interface UseSettings {
   api: string;
+  clickEvent?: TClickEvent;
 }
 
 export type TTerm = {

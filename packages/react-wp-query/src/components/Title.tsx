@@ -1,9 +1,14 @@
 import * as React from 'react';
 import usePost from '../hooks/usePost';
 
-const Title = () => {
+const Title = ({ className = '' }) => {
   const { title } = usePost();
-  return title ? <h3 dangerouslySetInnerHTML={{ __html: title?.rendered || '' }} /> : null;
+  return title ? (
+    <h3
+      className={`micyo-article-title ${className}`}
+      dangerouslySetInnerHTML={{ __html: title?.rendered || '' }}
+    />
+  ) : null;
 };
 
 export default Title;
