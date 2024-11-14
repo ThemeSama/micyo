@@ -24,7 +24,7 @@ const meta: Meta<typeof usePosts> = {
       }, []);
 
       return (
-        <WPProvider api="https://localhost:8443/wp-json/wp/v2" clickEvent={clickEvent}>
+        <WPProvider api="https://wordpress.org/news/wp-json/wp/v2" clickEvent={clickEvent}>
           <QueryClientProvider client={queryClient}>
             <Story />
           </QueryClientProvider>
