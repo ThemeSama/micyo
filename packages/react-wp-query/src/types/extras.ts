@@ -29,6 +29,7 @@ export type TClickEvent = (args: TClickArgs) => void;
 export interface UseSettings {
   api: string;
   clickEvent?: TClickEvent;
+  formatDate?: TDateFormat;
 }
 
 export type TTerm = {
@@ -39,3 +40,5 @@ export type TTerm = {
   taxonomy?: string;
   _links?: object;
 };
+
+export type TDateFormat = (date: string) => string | Date;

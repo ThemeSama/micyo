@@ -1,17 +1,19 @@
 import React, { ReactNode } from 'react';
 import WPContext from './WPContext';
-import { TClickEvent, UseSettings } from '../types/extras';
+import { TClickEvent, TDateFormat, UseSettings } from '../types/extras';
 
 interface ISettings {
   api: string;
   clickEvent?: TClickEvent;
+  formatDate?: TDateFormat;
   children: ReactNode;
 }
 
-export const WPProvider = ({ api, clickEvent, children }: ISettings) => {
+export const WPProvider = ({ api, clickEvent, formatDate, children }: ISettings) => {
   const contextValues: UseSettings = {
     api,
-    clickEvent
+    clickEvent,
+    formatDate
   };
 
   return <WPContext.Provider value={contextValues}>{children}</WPContext.Provider>;
