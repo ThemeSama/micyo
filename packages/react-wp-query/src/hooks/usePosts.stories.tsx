@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+import { format } from 'date-fns';
 
 import usePosts from './usePosts';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -12,6 +13,10 @@ import Content from '../components/Content';
 import PostMeta from '../components/Meta';
 import FeaturedImage from '../components/FeaturedImage';
 import { TClickArgs } from '../types/extras';
+import Categories from '../components/meta/Categories';
+import Date from '../components/meta/Date';
+import Tags from '../components/meta/Tags';
+import Author from '../components/meta/Author';
 
 const meta: Meta<typeof usePosts> = {
   title: 'react-wp-query/usePosts',
@@ -23,8 +28,15 @@ const meta: Meta<typeof usePosts> = {
         console.log(type, values);
       }, []);
 
+      const formatDate = React.useCallback((date: string) => {
+        return format(date, 'MMMM dd, yyyy');
+      }, []);
+
       return (
-        <WPProvider api="https://wordpress.org/news/wp-json/wp/v2" clickEvent={clickEvent}>
+        <WPProvider
+          api="https://wordpress.org/news/wp-json/wp/v2"
+          clickEvent={clickEvent}
+          formatDate={formatDate}>
           <QueryClientProvider client={queryClient}>
             <Story />
           </QueryClientProvider>
@@ -56,17 +68,29 @@ export const Posts: Story = {
       <>Loading...</>
     ) : (
       <>
+        <h1>
+          News <span className="micyo-total-news">{pagination.total} total</span>
+        </h1>
         {Array.isArray(posts?.data) &&
           posts?.data?.map((post: TPost) => (
             <Post key={`posts-${post.id}`} post={post}>
-              <Title />
-              <PostMeta />
+              <header>
+                <Title />
+                <div className="micyo-article-meta-storybook">
+                  <Author />
+                  <Categories />
+                </div>
+              </header>
               <Excerpt />
+              <footer>
+                <Date />
+                <Tags />
+              </footer>
             </Post>
           ))}
 
         <button onClick={() => setPage((p) => p - 1)} disabled={!pagination.hasPrev}>
-          Prev Page
+          Prev
         </button>
         <input
           value={page}
@@ -76,12 +100,8 @@ export const Posts: Story = {
           onChange={(e) => setPage(Number(e.target.value))}
         />
         <button onClick={() => setPage((p) => p + 1)} disabled={!pagination.hasNext}>
-          Next Page
+          Next
         </button>
-        <pre>
-          Current Page: {pagination.page} / Total Pages: {pagination.pages} / Per Page:{' '}
-          {pagination.per_page} / Total: {pagination.total}
-        </pre>
       </>
     );
   }

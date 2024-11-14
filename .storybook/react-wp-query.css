@@ -1,0 +1,156 @@
+.micyo-entry-meta,
+.micyo-article-meta-storybook {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.micyo-entry-meta a,
+.micyo-article-meta-storybook a {
+  text-decoration: none;
+  color: #232324;
+}
+
+.micyo-entry-meta a:hover,
+.micyo-article-meta-storybook a:hover {
+  color: rgb(2, 156, 253);
+}
+
+.micyo-entry-meta .micyo-categories-meta,
+.micyo-article-meta-storybook .micyo-categories-meta {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  display: flex;
+}
+
+.micyo-entry-meta .micyo-author-meta {
+  order: 1;
+}
+
+.micyo-entry-meta .micyo-categories-meta {
+  order: 2;
+}
+
+.micyo-entry-meta .micyo-date-meta {
+  order: 3;
+}
+
+.micyo-entry-meta .micyo-tags-meta {
+  order: 4;
+}
+
+.micyo-entry-meta .micyo-author-meta:before,
+.micyo-article-meta-storybook .micyo-author-meta:before {
+  content: 'By';
+  padding-right: 0.25rem;
+}
+
+.micyo-entry-meta .micyo-categories-meta:before,
+.micyo-article-meta-storybook .micyo-categories-meta:before {
+  content: 'in';
+  padding-right: 0.25rem;
+}
+
+.micyo-entry-meta .micyo-categories-meta li + li:before,
+.micyo-article-meta-storybook .micyo-categories-meta li + li:before {
+  content: ', ';
+}
+
+.micyo-article-title {
+  margin-bottom: 0.5rem;
+}
+
+.micyo-article footer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.micyo-tags-meta {
+  list-style-type: none;
+  padding-left: 0.5rem;
+  display: flex;
+  margin: 0;
+}
+
+.micyo-tags-meta a {
+  font-size: 0.75rem;
+  background: #eee;
+  border-radius: 3px 0 0 3px;
+  color: #232324;
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 20px 0 23px;
+  position: relative;
+  margin: 0 5px 5px 0;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.micyo-tags-meta a:before {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  content: '';
+  height: 6px;
+  left: 7px;
+  position: absolute;
+  width: 6px;
+  top: 7px;
+}
+
+.micyo-tags-meta a:after {
+  background: #fff;
+  border-bottom: 10px solid transparent;
+  border-left: 7px solid #eee;
+  border-top: 10px solid transparent;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: all 0.3s ease;
+}
+
+.micyo-tags-meta a:hover {
+  background-color: rgb(2, 156, 253);
+  color: white;
+}
+
+.micyo-tags-meta a:hover::after {
+  border-left-color: rgb(2, 156, 253);
+}
+
+.micyo-date-meta {
+  font-size: 0.875rem;
+}
+
+.wp-block-image {
+  margin: 0;
+}
+
+.micyo-article > img,
+.wp-block-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.micyo-entry-meta {
+  display: flex;
+}
+
+.micyo-total-news {
+  font-size: 0.875rem;
+  color: rgb(2, 156, 253);
+}
+
+.micyo-article > footer > .micyo-tags-meta {
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.micyo-article:hover > footer > .micyo-tags-meta {
+  opacity: 1;
+}
