@@ -155,3 +155,8 @@
 .micyo-btn:hover {
   background: #eef4f9;
 }
+
+.micyo-btn:disabled {
+  cursor: auto;
+  opacity: 0.6;
+}

@@ -79,6 +79,9 @@ export type TPostsArgs = {
   tags_exclude?: number[];
   sticky?: boolean;
   password?: string;
+  _embed?: boolean | string | string[];
+  _fields?: string | string[];
+  _method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'CONNECT' | 'OPTIONS' | 'TRACE';
   [key: string]: any;
 };
 
