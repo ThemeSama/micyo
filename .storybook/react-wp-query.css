@@ -154,3 +154,37 @@
 .micyo-article:hover > footer > .micyo-tags-meta {
   opacity: 1;
 }
+
+.micyo-pagination {
+  display: flex;
+  align-items: center;
+}
+
+.micyo-pagination-numbers {
+  font-size: 0.875rem;
+  box-shadow: hsla(203, 50%, 30%, 0.15) 0 0 0 1px inset;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 0 0.5rem;
+}
+
+.micyo-pagination-numbers:has(input:focus) {
+  box-shadow: #029cfd 0 0 0 1px inset;
+}
+
+.micyo-pagination-numbers input {
+  border: 0;
+  background-color: transparent;
+  height: 28px;
+  line-height: 28px;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.micyo-pagination-numbers input:focus {
+  outline: none;
+}
