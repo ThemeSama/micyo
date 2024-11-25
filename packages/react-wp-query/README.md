@@ -23,7 +23,7 @@ yarn add @micyo/react-wp-query
 
 ## Configuration
 
-Wrap your project with the WPProvider component and pass the WordPress REST API URL you want to connect to as the **api** prop to the component. With the clickEvent prop, you can handle virtual routing for post meta clicks. The links are set up in this way to allow you to work with any framework or library you prefer.
+Wrap your project with the WPProvider component and pass the WordPress REST API URL you want to connect to as the **api** prop to the component. With the **clickEvent** prop, you can handle virtual routing for post meta clicks. You can adjust the date format for all date components on the pages using the **formatDate** prop. The links are set up in this way to allow you to work with any react framework or library you prefer.
 
 ```js
 import { useCallback } from 'react';
@@ -41,14 +41,41 @@ const App = ({ children }) => {
     }
   }, []);
 
+  const formatDate = useCallback((date) => {
+    // format your date here
+    return date;
+  }, []);
+
   return (
-    <WPProvider api="https://wordpress.org/news/wp-json/wp/v2" clickEvent={clickEvent}>
+    <WPProvider
+      api="https://wordpress.org/news/wp-json/"
+      clickEvent={clickEvent}
+      formatDate={formatDate}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WPProvider>
   );
 };
 
 export default App;
+```
+
+### Using Axios for Requests (Custom Fetch Handler)
+
+The example below uses a custom fetch handler for making all the requests with axios.
+
+```
+import apiFetch from '@wordpress/api-fetch';
+import axios from 'axios';
+
+apiFetch.setFetchHandler( ( options ) => {
+	const { url, path, data, method } = options;
+
+	return axios( {
+		url: url || path,
+		method,
+		data,
+	} );
+} );
 ```
 
 ## Hooks

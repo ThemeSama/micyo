@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { format } from 'date-fns';
 
 import usePosts from './usePosts';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TPost, TPostsArgs } from '../types/posts';
 import { WPProvider } from '../context/WPProvider';
 import Post from '../components/Post';
@@ -18,11 +18,12 @@ import Date from '../components/meta/Date';
 import Tags from '../components/meta/Tags';
 import Author from '../components/meta/Author';
 
+const queryClient = new QueryClient();
+
 const meta: Meta<typeof usePosts> = {
   title: 'react-wp-query/usePosts',
   decorators: [
     (Story) => {
-      const queryClient = new QueryClient();
       const clickEvent = React.useCallback(({ event, type, values }: TClickArgs) => {
         event.preventDefault();
         //
@@ -34,7 +35,7 @@ const meta: Meta<typeof usePosts> = {
 
       return (
         <WPProvider
-          api="https://wordpress.org/news/wp-json/wp/v2"
+          api="https://wordpress.org/news/wp-json/"
           clickEvent={clickEvent}
           formatDate={formatDate}>
           <QueryClientProvider client={queryClient}>

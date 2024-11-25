@@ -1,7 +1,11 @@
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useCallback, useMemo, useState } from 'react';
-import useSettings from './useSettings';
+import useWPContext from './useWPContext';
 import { TPost, TPostsPagination, IPosts, IPostsQueryResults } from '../types/posts';
+import apiFetch from '@wordpress/api-fetch';
+import { addQueryArgs } from '@wordpress/url';
+import { AxiosResponseHeaders, AxiosResponse, RawAxiosResponseHeaders } from 'axios';
+import { isFetchResponse } from '../helpers/isFetchResponse';
 
 const usePosts = ({
   id,
@@ -9,15 +13,22 @@ const usePosts = ({
   enabled = true,
   queryArgs
 }: IPosts): IPostsQueryResults => {
-  const { api } = useSettings();
+  const { api } = useWPContext();
 
-  const [headers, setHeaders] = useState<Headers>();
+  const [headers, setHeaders] = useState<
+    Headers | RawAxiosResponseHeaders | AxiosResponseHeaders
+  >();
 
   const pagination: TPostsPagination = useMemo(() => {
     let total: number = 1,
       pages: number = 1;
 
-    if (headers && headers.get('x-wp-total') && headers.get('x-wp-totalpages')) {
+    if (
+      headers &&
+      typeof headers?.get === 'function' &&
+      headers.get('x-wp-total') &&
+      headers.get('x-wp-totalpages')
+    ) {
       total = headers.get('x-wp-total') !== null ? Number(headers.get('x-wp-total')) : 1;
       pages = headers.get('x-wp-totalpages') !== null ? Number(headers.get('x-wp-totalpages')) : 1;
     }
@@ -31,19 +42,30 @@ const usePosts = ({
     };
   }, [headers, queryArgs]);
 
+  // detect queryArgs changes and trigger requests
   const queryParams = useMemo(() => {
-    const params = new URLSearchParams(queryArgs);
-
-    return params;
+    return addQueryArgs('', queryArgs);
   }, [queryArgs]);
 
   const posts = useQuery({
     queryKey: [...queryParams, ...queryKey],
     enabled: enabled && !id ? true : false,
     queryFn: async ({ signal }): Promise<TPost[]> => {
-      const response = await fetch(`${api}/posts?${queryParams}`, { signal });
+      const response: Response | AxiosResponse = await apiFetch({
+        path: addQueryArgs('/wp/v2/posts', queryArgs),
+        signal,
+        parse: false
+      });
+
       setHeaders(() => response.headers);
-      return response.json();
+
+      // fetch api return
+      if (isFetchResponse(response)) {
+        return response.json();
+      }
+
+      // axios return
+      return response?.data;
     }
   });
 
@@ -51,9 +73,21 @@ const usePosts = ({
     queryKey: [`post-${id}`, ...queryParams, ...queryKey],
     enabled: id ? true : false,
     queryFn: async ({ signal }): Promise<TPost> => {
-      const response = await fetch(`${api}/posts/${id}?${queryParams}`, { signal });
-      setHeaders(response.headers);
-      return response.json();
+      const response: Response | AxiosResponse = await apiFetch({
+        path: addQueryArgs(`/wp/v2/posts/${id}`, queryArgs),
+        signal,
+        parse: false
+      });
+
+      setHeaders(() => response.headers);
+
+      // fetch api return
+      if (isFetchResponse(response)) {
+        return response.json();
+      }
+
+      // axios return
+      return response?.data;
     }
   });
 

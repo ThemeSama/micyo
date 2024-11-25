@@ -1,10 +1,10 @@
 import * as React from 'react';
 import usePost from '../../hooks/usePost';
 import { TUsers } from '../../types/users';
-import useSettings from '../../hooks/useSettings';
+import useWPContext from '../../hooks/useWPContext';
 
 const Author = ({ className = '' }) => {
-  const { clickEvent } = useSettings();
+  const { clickEvent } = useWPContext();
   const { _embedded } = usePost();
   return _embedded?.author ? (
     <div className={`micyo-author-meta ${className}`}>
