@@ -4,7 +4,7 @@ import WPContext from './context/WPContext';
 import PostContext from './context/PostContext';
 import usePosts from './hooks/usePosts';
 import usePost from './hooks/usePost';
-import useSettings from './hooks/useSettings';
+import useWPContext from './hooks/useWPContext';
 
 import Post from './components/Post';
 import Title from './components/Title';
@@ -20,7 +20,7 @@ import Tags from './components/meta/Tags';
 export {
   usePost,
   usePosts,
-  useSettings,
+  useWPContext,
   WPProvider,
   PostProvider,
   WPContext,

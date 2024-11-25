@@ -1,8 +1,7 @@
 import * as React from 'react';
 import usePost from '../../hooks/usePost';
 import { TDateFormat } from '../../types/extras';
-import useSettings from '../../hooks/useSettings';
-import { formatDate } from 'date-fns';
+import useWPContext from '../../hooks/useWPContext';
 
 interface IDate {
   format?: TDateFormat;
@@ -10,7 +9,7 @@ interface IDate {
 }
 
 const Date = ({ format, className = '' }: IDate) => {
-  const { formatDate } = useSettings();
+  const { formatDate } = useWPContext();
   const { date } = usePost();
   const formatFn = format ?? formatDate;
 

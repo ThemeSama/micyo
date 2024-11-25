@@ -1,6 +1,6 @@
 import { createContext } from 'react';
-import { UseSettings } from '../types/extras';
+import { UseWPContext } from '../types/extras';
 
-const WPContext = createContext<UseSettings>({} as UseSettings);
+const WPContext = createContext<UseWPContext>({} as UseWPContext);
 
 export default WPContext;
