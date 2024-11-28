@@ -174,7 +174,6 @@ export const AuthorPosts: Story = {
 };
 
 export const CategoryFilteredPosts: Story = {
-  storyName: 'category',
   render: (args: TPostsArgs) => {
     const { posts } = usePosts({
       queryArgs: { page: args.page, per_page: args.per_page, categories: args.categories }

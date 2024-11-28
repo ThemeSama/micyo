@@ -36,3 +36,5 @@ export {
   Date,
   Tags
 };
+
+export * from './types';

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useMemo } from 'react';
 import usePost from '../../hooks/usePost';
 import { TDateFormat } from '../../types/extras';
 import useWPContext from '../../hooks/useWPContext';
@@ -13,9 +14,21 @@ const Date = ({ format, className = '' }: IDate) => {
   const { date } = usePost();
   const formatFn = format ?? formatDate;
 
-  return date ? (
+  const postDate: string = useMemo(() => {
+    if (typeof format === 'function' && date) {
+      return format(date).toString();
+    } else if (typeof formatDate === 'function' && date) {
+      return formatDate(date).toString();
+    } else if (date) {
+      return date;
+    }
+
+    return '';
+  }, [date, format, formatDate]);
+
+  return postDate && date ? (
     <time dateTime={date} className={`micyo-date-meta ${className}`}>
-      {typeof formatFn === 'function' && date ? <>{formatFn(date)}</> : date}
+      {postDate}
     </time>
   ) : null;
 };
