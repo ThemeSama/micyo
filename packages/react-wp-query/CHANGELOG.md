@@ -1,5 +1,10 @@
 ## @micyo/react-wp-query changelog
 
+### 1.1.1
+
+- feat: Type definitions exported for typescript projects
+- fix: Date meta component's typescript error
+
 ### 1.1.0
 
 - feat: The @wordpress/api-fetch library has been adopted for Fetch API requests.
