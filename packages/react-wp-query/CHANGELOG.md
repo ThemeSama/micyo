@@ -1,5 +1,9 @@
 ## @micyo/react-wp-query changelog
 
+### 1.2.0
+
+- update: Peer dependencies for React 19
+
 ### 1.1.1
 
 - feat: Type definitions exported for typescript projects
