@@ -1,9 +1,26 @@
 import { QueryKey } from '@tanstack/react-query';
-import { TPostsArgs } from './posts';
+import { TPost, TPostsArgs } from './posts';
+import { TCategoriesArgs, TCategory } from './categories';
 
-export interface IQuery {
+export type ApiTypes = {
+  posts: TPost[];
+  categories: TCategory[];
+};
+
+export type SingleApiTypes = {
+  posts: TPost;
+  categories: TCategory;
+};
+
+type QueryArgsTypes = {
+  posts: TPostsArgs;
+  categories: TCategoriesArgs;
+};
+
+export interface UseApiParams<T extends keyof ApiTypes> {
   id?: number;
-  queryKey?: QueryKey;
   enabled?: boolean;
-  queryArgs?: TPostsArgs;
+  queryArgs?: QueryArgsTypes[T];
+  queryKey?: QueryKey;
+  type?: T;
 }

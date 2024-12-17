@@ -1,7 +1,5 @@
 import { useContext } from 'react';
-import PostContext from '../context/PostContext';
-import { TPost } from '../types/posts';
+import { PostContext } from '../context';
+import { TPost } from '../types';
 
-const usePost = (): TPost => useContext(PostContext);
-
-export default usePost;
+export const usePost = (): TPost => useContext(PostContext);

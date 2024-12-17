@@ -3,20 +3,21 @@ import { Meta, StoryObj } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { format } from 'date-fns';
 
-import usePosts from './usePosts';
-import { TPost, TPostsArgs } from '../types/posts';
-import { WPProvider } from '../context/WPProvider';
-import Post from '../components/Post';
-import Excerpt from '../components/Excerpt';
-import Title from '../components/Title';
-import Content from '../components/Content';
-import PostMeta from '../components/Meta';
-import FeaturedImage from '../components/FeaturedImage';
-import { TClickArgs } from '../types/extras';
-import Categories from '../components/meta/Categories';
-import Date from '../components/meta/Date';
-import Tags from '../components/meta/Tags';
-import Author from '../components/meta/Author';
+import { usePosts } from './usePosts';
+import { TPost, TPostsArgs, TClickArgs } from '../types';
+import { WPProvider } from '../context';
+import {
+  Post,
+  Excerpt,
+  Title,
+  Content,
+  Meta as PostMeta,
+  FeaturedImage,
+  Categories,
+  Date,
+  Tags,
+  Author
+} from '../components';
 
 const queryClient = new QueryClient();
 

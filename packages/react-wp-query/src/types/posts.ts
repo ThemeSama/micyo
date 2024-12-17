@@ -1,8 +1,8 @@
 import { UseQueryResult } from '@tanstack/react-query';
 import { TContent, TExcerpt, TGuid, TTitle } from './extras';
-import { IQuery } from './query';
 import { TEmbedded } from './embedded';
 import { AxiosResponseHeaders, RawAxiosResponseHeaders } from 'axios';
+import { TPagination } from './pagination';
 
 /**
  * Post Type
@@ -86,21 +86,10 @@ export type TPostsArgs = {
   [key: string]: any;
 };
 
-export interface IPosts extends IQuery {}
-
 export interface IPostsQueryResults {
   id?: number;
   post: UseQueryResult;
   posts: UseQueryResult;
   headers?: Headers | RawAxiosResponseHeaders | AxiosResponseHeaders;
-  pagination: TPostsPagination;
-  updatePost: Function;
-  deletePost: Function;
+  pagination: TPagination;
 }
-
-export type TPostsPagination = TPostsArgs & {
-  pages: number;
-  total: number;
-  hasNext: boolean;
-  hasPrev: boolean;
-};

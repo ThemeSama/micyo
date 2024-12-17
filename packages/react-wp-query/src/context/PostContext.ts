@@ -1,6 +1,4 @@
 import { createContext } from 'react';
-import { TPost } from '../types/posts';
+import { TPost } from '../types';
 
-const PostContext = createContext<TPost>({} as TPost);
-
-export default PostContext;
+export const PostContext = createContext<TPost>({} as TPost);

@@ -1,9 +1,8 @@
 import * as React from 'react';
-import usePost from '../../hooks/usePost';
-import { TUsers } from '../../types/users';
-import useWPContext from '../../hooks/useWPContext';
+import { usePost, useWPContext } from '../../hooks';
+import { TUsers } from '../../types';
 
-const Author = ({ className = '' }) => {
+export const Author = ({ className = '' }) => {
   const { clickEvent } = useWPContext();
   const { _embedded } = usePost();
   return _embedded?.author ? (
@@ -19,5 +18,3 @@ const Author = ({ className = '' }) => {
     </div>
   ) : null;
 };
-
-export default Author;

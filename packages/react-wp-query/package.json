@@ -58,7 +58,7 @@
     "@types/react": "^19.0.1",
     "@types/styled-components": "^5.1.34",
     "@wordpress/api-fetch": "^7.14.0",
-    "axios": "^1.7.7",
+    "axios": "^1.7.9",
     "react": "^19.0.0",
     "styled-components": "^6.1.13"
   }

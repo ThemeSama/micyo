@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect } from 'react';
-import WPContext from './WPContext';
-import { TClickEvent, TDateFormat, UseWPContext } from '../types/extras';
+import { WPContext } from './WPContext';
+import { TClickEvent, TDateFormat, UseWPContext } from '../types';
 import apiFetch from '@wordpress/api-fetch';
 
 interface IWPProviderProps {

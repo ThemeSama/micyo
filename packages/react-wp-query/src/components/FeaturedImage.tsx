@@ -1,7 +1,7 @@
 import * as React from 'react';
-import usePost from '../hooks/usePost';
+import { usePost } from '../hooks';
 
-const FeaturedImage = ({ size = 'full' }) => {
+export const FeaturedImage = ({ size = 'full' }) => {
   const { _embedded } = usePost(),
     image = _embedded && _embedded['wp:featuredmedia']?.find((t) => t.media_type === 'image');
 
@@ -11,5 +11,3 @@ const FeaturedImage = ({ size = 'full' }) => {
 
   return image ? <img src={imageURL} alt={image.alt_text} /> : null;
 };
-
-export default FeaturedImage;

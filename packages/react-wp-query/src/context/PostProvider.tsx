@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import PostContext from './PostContext';
-import { TPost } from '../types/posts';
+import { PostContext } from './PostContext';
+import { TPost } from '../types';
 
 interface IPostProviderProps {
   post: TPost;
