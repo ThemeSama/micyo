@@ -1,11 +1,7 @@
 import * as React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { format } from 'date-fns';
-
 import { usePosts } from './usePosts';
-import { TPost, TPostsArgs, TClickArgs } from '../types';
-import { WPProvider } from '../context';
+import { TPost, TPostsArgs } from '../types';
 import {
   Post,
   Excerpt,
@@ -14,37 +10,20 @@ import {
   Meta as PostMeta,
   FeaturedImage,
   Categories,
-  Date,
+  PostDate,
   Tags,
   Author
 } from '../components';
-
-const queryClient = new QueryClient();
+import { StorybookDecorator } from '../helpers/StorybookDecorator';
 
 const meta: Meta<typeof usePosts> = {
   title: 'react-wp-query/usePosts',
   decorators: [
-    (Story) => {
-      const clickEvent = React.useCallback(({ event, type, values }: TClickArgs) => {
-        event.preventDefault();
-        //
-      }, []);
-
-      const formatDate = React.useCallback((date: string) => {
-        return format(date, 'MMMM dd, yyyy');
-      }, []);
-
-      return (
-        <WPProvider
-          api="https://wordpress.org/news/wp-json/"
-          clickEvent={clickEvent}
-          formatDate={formatDate}>
-          <QueryClientProvider client={queryClient}>
-            <Story />
-          </QueryClientProvider>
-        </WPProvider>
-      );
-    }
+    (Story) => (
+      <StorybookDecorator>
+        <Story />
+      </StorybookDecorator>
+    )
   ],
   parameters: {
     layout: 'padded'
@@ -103,7 +82,7 @@ export const Posts: Story = {
               </header>
               <Excerpt />
               <footer>
-                <Date />
+                <PostDate />
                 <Tags />
               </footer>
             </Post>

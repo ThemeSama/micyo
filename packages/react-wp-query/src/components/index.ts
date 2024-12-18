@@ -1,4 +1,4 @@
-export * from './meta/index';
+export * from './post-meta';
 export * from './Content';
 export * from './Excerpt';
 export * from './FeaturedImage';

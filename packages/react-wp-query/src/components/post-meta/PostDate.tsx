@@ -8,10 +8,9 @@ interface IDate {
   className?: string;
 }
 
-export const Date = ({ format, className = '' }: IDate) => {
+export const PostDate = ({ format, className = '' }: IDate) => {
   const { formatDate } = useWPContext();
   const { date } = usePost();
-  const formatFn = format ?? formatDate;
 
   const postDate: string = useMemo(() => {
     if (typeof format === 'function' && date) {
