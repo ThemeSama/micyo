@@ -1,25 +1,25 @@
 import { UseApiParams } from '../types';
-import { IPostsQueryResults } from '../types/posts';
+import { ICategoriesQueryResults } from '../types';
 import { useWPQuery } from './useWPQuery';
 
-export const usePosts = ({
+export const useCategories = ({
   id,
-  queryKey = ['posts'],
+  queryKey = ['categories'],
   enabled = true,
   queryArgs
-}: UseApiParams<'posts'>): IPostsQueryResults => {
+}: UseApiParams<'categories'>): ICategoriesQueryResults => {
   const { list, single, headers, pagination } = useWPQuery({
     id,
     enabled,
     queryArgs,
     queryKey,
-    type: 'posts'
+    type: 'categories'
   });
 
   return {
     id,
-    post: single,
-    posts: list,
+    category: single,
+    categories: list,
     headers,
     pagination
   };

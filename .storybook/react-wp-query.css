@@ -188,3 +188,24 @@
 .micyo-pagination-numbers input:focus {
   outline: none;
 }
+
+.micyo-categories {
+  padding-left: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.micyo-categories button {
+  white-space: nowrap;
+}
+
+.micyo-categories button.selected {
+  background-color: #029cfd;
+}
+
+.micyo-news {
+  display: flex;
+  gap: 1rem;
+}

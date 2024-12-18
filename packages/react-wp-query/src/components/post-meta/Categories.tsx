@@ -1,8 +1,7 @@
 import * as React from 'react';
-import usePost from '../../hooks/usePost';
-import useWPContext from '../../hooks/useWPContext';
+import { usePost, useWPContext } from '../../hooks';
 
-const Categories = ({ className = '' }) => {
+export const Categories = ({ className = '' }) => {
   const { clickEvent } = useWPContext();
   const { _embedded } = usePost(),
     term = _embedded ? _embedded['wp:term']?.flat()?.filter((t) => t.taxonomy === 'category') : [];
@@ -21,5 +20,3 @@ const Categories = ({ className = '' }) => {
     </ul>
   ) : null;
 };
-
-export default Categories;

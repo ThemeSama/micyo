@@ -1,5 +1,10 @@
 ## @micyo/react-wp-query changelog
 
+### 1.3.0
+
+- feat: useCategories hook
+- changed: Date component rename to PostDate
+
 ### 1.2.0
 
 - update: Peer dependencies for React 19

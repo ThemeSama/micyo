@@ -1,18 +1,16 @@
 import * as React from 'react';
 import { useMemo } from 'react';
-import usePost from '../../hooks/usePost';
-import { TDateFormat } from '../../types/extras';
-import useWPContext from '../../hooks/useWPContext';
+import { usePost, useWPContext } from '../../hooks';
+import { TDateFormat } from '../../types';
 
 interface IDate {
   format?: TDateFormat;
   className?: string;
 }
 
-const Date = ({ format, className = '' }: IDate) => {
+export const PostDate = ({ format, className = '' }: IDate) => {
   const { formatDate } = useWPContext();
   const { date } = usePost();
-  const formatFn = format ?? formatDate;
 
   const postDate: string = useMemo(() => {
     if (typeof format === 'function' && date) {
@@ -32,5 +30,3 @@ const Date = ({ format, className = '' }: IDate) => {
     </time>
   ) : null;
 };
-
-export default Date;

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import usePost from '../hooks/usePost';
+import { usePost } from '../hooks';
 
-const Title = ({ className = '' }) => {
+export const Title = ({ className = '' }) => {
   const { title } = usePost();
   return title ? (
     <h3
@@ -10,5 +10,3 @@ const Title = ({ className = '' }) => {
     />
   ) : null;
 };
-
-export default Title;

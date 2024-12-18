@@ -1,49 +1,29 @@
 import * as React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { format } from 'date-fns';
-
-import usePosts from './usePosts';
-import { TPost, TPostsArgs } from '../types/posts';
-import { WPProvider } from '../context/WPProvider';
-import Post from '../components/Post';
-import Excerpt from '../components/Excerpt';
-import Title from '../components/Title';
-import Content from '../components/Content';
-import PostMeta from '../components/Meta';
-import FeaturedImage from '../components/FeaturedImage';
-import { TClickArgs } from '../types/extras';
-import Categories from '../components/meta/Categories';
-import Date from '../components/meta/Date';
-import Tags from '../components/meta/Tags';
-import Author from '../components/meta/Author';
-
-const queryClient = new QueryClient();
+import { usePosts } from './usePosts';
+import { TPost, TPostsArgs } from '../types';
+import {
+  Post,
+  Excerpt,
+  Title,
+  Content,
+  Meta as PostMeta,
+  FeaturedImage,
+  Categories,
+  PostDate,
+  Tags,
+  Author
+} from '../components';
+import { StorybookDecorator } from '../helpers/StorybookDecorator';
 
 const meta: Meta<typeof usePosts> = {
   title: 'react-wp-query/usePosts',
   decorators: [
-    (Story) => {
-      const clickEvent = React.useCallback(({ event, type, values }: TClickArgs) => {
-        event.preventDefault();
-        //
-      }, []);
-
-      const formatDate = React.useCallback((date: string) => {
-        return format(date, 'MMMM dd, yyyy');
-      }, []);
-
-      return (
-        <WPProvider
-          api="https://wordpress.org/news/wp-json/"
-          clickEvent={clickEvent}
-          formatDate={formatDate}>
-          <QueryClientProvider client={queryClient}>
-            <Story />
-          </QueryClientProvider>
-        </WPProvider>
-      );
-    }
+    (Story) => (
+      <StorybookDecorator>
+        <Story />
+      </StorybookDecorator>
+    )
   ],
   parameters: {
     layout: 'padded'
@@ -102,7 +82,7 @@ export const Posts: Story = {
               </header>
               <Excerpt />
               <footer>
-                <Date />
+                <PostDate />
                 <Tags />
               </footer>
             </Post>
