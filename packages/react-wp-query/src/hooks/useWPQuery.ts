@@ -5,7 +5,7 @@ import { addQueryArgs } from '@wordpress/url';
 import { AxiosResponse } from 'axios';
 import apiFetch from '@wordpress/api-fetch';
 import { isFetchResponse } from '../helpers/isFetchResponse';
-import { ApiTypes, SingleApiTypes, UseApiParams } from '../types';
+import { ApiTypes, SingleApiTypes, IQueryParams } from '../types';
 
 export const useWPQuery = <T extends keyof ApiTypes>({
   id,
@@ -13,7 +13,7 @@ export const useWPQuery = <T extends keyof ApiTypes>({
   queryArgs,
   queryKey = [],
   type
-}: UseApiParams<T>) => {
+}: IQueryParams<T>) => {
   const { pagination, headers, setHeaders } = usePagination(queryArgs?.page);
 
   const queryParams = useMemo(() => {

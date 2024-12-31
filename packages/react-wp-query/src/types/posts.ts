@@ -3,28 +3,102 @@ import { TContent, TExcerpt, TGuid, TTitle } from './extras';
 import { TEmbedded } from './embedded';
 import { AxiosResponseHeaders, RawAxiosResponseHeaders } from 'axios';
 import { TPagination } from './pagination';
+import { IQueryResults } from './query';
 
 /**
- * Post Type
+ * Represents a WordPress post.
+ *
+ * @see https://developer.wordpress.org/rest-api/reference/posts/
  */
 export type TPost = {
+  /**
+   * The date the post was published, in the site's timezone.
+   */
   date?: string | null;
+
+  /**
+   * The date the post was published, as GMT.
+   */
   date_gmt?: string | null;
+
+  /**
+   * The globally unique identifier for the post.
+   */
   guid?: TGuid;
+
+  /**
+   * The unique identifier for the post.
+   */
   id?: number;
+
+  /**
+   * URL to the post.
+   */
   link?: string;
+
+  /**
+   * The date the post was last modified, in the site's timezone.
+   */
   modified?: string;
+
+  /**
+   * The date the post was last modified, as GMT.
+   */
   modified_gmt?: string;
+
+  /**
+   * An alphanumeric identifier for the post unique to its type.
+   */
   slug?: string;
+
+  /**
+   * A named status for the post.
+   */
   status?: 'publish' | 'future' | 'draft' | 'pending' | 'private';
+
+  /**
+   * Type of post.
+   */
   type?: string;
+
+  /**
+   * The title for the post.
+   */
   title?: TTitle;
+
+  /**
+   * The content for the post.
+   */
   content?: TContent;
+
+  /**
+   * The ID for the author of the post.
+   */
   author?: number;
+
+  /**
+   * The excerpt for the post.
+   */
   excerpt?: TExcerpt;
+
+  /**
+   * The ID of the featured media for the post.
+   */
   featured_media?: number;
+
+  /**
+   * Whether or not comments are open on the post.
+   */
   comment_status?: 'open' | 'closed';
+
+  /**
+   * Whether or not the post can be pinged.
+   */
   ping_status?: 'open' | 'closed';
+
+  /**
+   * The format for the post.
+   */
   format?:
     | 'standard'
     | 'aside'
@@ -36,15 +110,44 @@ export type TPost = {
     | 'status'
     | 'video'
     | 'audio';
+
+  /**
+   * Meta fields.
+   */
   meta?: object;
+
+  /**
+   * Whether or not the post is sticky.
+   */
   sticky?: boolean;
+
+  /**
+   * The theme file to use to display the post.
+   */
   template?: string;
+
+  /**
+   * The terms assigned to the post in the category taxonomy.
+   */
   categories?: number[];
+
+  /**
+   * The terms assigned to the post in the post_tag taxonomy.
+   */
   tags?: number[];
+
+  /**
+   * Embedded representation of the post.
+   */
   _embedded?: TEmbedded;
 };
 
-export type TPostsArgs = {
+/**
+ * Arguments for querying posts.
+ *
+ * @see https://developer.wordpress.org/rest-api/reference/posts/#arguments
+ */
+export type TPostsQueryArgs = {
   context?: 'view' | 'embed' | 'edit';
   page?: number;
   per_page?: number;
@@ -86,10 +189,10 @@ export type TPostsArgs = {
   [key: string]: any;
 };
 
-export interface IPostsQueryResults {
-  id?: number;
+/**
+ * Represents the results of a posts query.
+ */
+export interface IPostsQueryResults extends IQueryResults {
   post: UseQueryResult;
   posts: UseQueryResult;
-  headers?: Headers | RawAxiosResponseHeaders | AxiosResponseHeaders;
-  pagination: TPagination;
 }
