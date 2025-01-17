@@ -1,0 +1,11 @@
+import * as React from 'react';
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as useTags from './useTags.stories';
+
+<Meta of={useTags} title="react-wp-query/useTags" />
+
+# useTags
+
+The WordPress REST API Tags endpoint enables developers to retrieve and interact with post tags programmatically. This includes accessing a list of tags along with their associated details, such as name, slug, description, and the count of posts using each tag. This endpoint is particularly useful for applications and integrations that need to dynamically manage or display tag-based content filtering and organization. [https://developer.wordpress.org/rest-api/reference/tags/](https://developer.wordpress.org/rest-api/reference/tags/).
+
+<Canvas of={useTags.Tags} />

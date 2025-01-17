@@ -19,7 +19,7 @@ const preview: Preview = {
         order: [
           'About Micyo',
           'react-wp-query',
-          ['About Library', '*', 'Changelog'],
+          ['About Library', 'usePosts', 'useCategories', 'useTags', 'usePages', '*', 'Changelog'],
           'react-forms',
           [
             'About Library',

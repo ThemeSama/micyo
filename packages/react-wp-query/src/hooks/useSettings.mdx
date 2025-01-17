@@ -1,0 +1,11 @@
+import * as React from 'react';
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as useSettings from './useSettings.stories';
+
+<Meta of={useSettings} title="react-wp-query/useSettings" />
+
+# useSettings
+
+The WordPress REST API Settings endpoint provides access to site-wide settings, allowing developers to retrieve and update various configurable options for a WordPress site. This includes general settings such as site title, description, URL, time zone, date format, and more. With proper authentication, this endpoint enables programmatic management of settings, making it a powerful tool for integrations and automations that need to dynamically configure site preferences. For references, visit [https://developer.wordpress.org/rest-api/reference/settings/](https://developer.wordpress.org/rest-api/reference/settings/).
+
+<Canvas of={useSettings.SettingsResponse} />

@@ -1,0 +1,11 @@
+import * as React from 'react';
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as useCategories from './useCategories.stories';
+
+<Meta of={useCategories} title="react-wp-query/useCategories" />
+
+# useCategories
+
+The WordPress REST API Categories endpoint allows developers to interact with post categories programmatically. This includes retrieving a list of categories and their details, such as name, slug, description, parent category, and count of associated posts. This endpoint is essential for applications and integrations that require dynamic categorization of content, enabling efficient organization and filtering of posts. For reference, visit [https://developer.wordpress.org/rest-api/reference/categories/](https://developer.wordpress.org/rest-api/reference/categories/).
+
+<Canvas of={useCategories.Categories} />
