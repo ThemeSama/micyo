@@ -41,6 +41,6 @@
   "author": "themesama",
   "license": "MIT",
   "peerDependencies": {
-    "react": "^18.3.0"
+    "react": ">=18.0.0"
   }
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { usePosts } from './usePosts';
-import { TPost, TPostsArgs } from '../types';
+import { TPost, TPostsQueryArgs } from '../types';
 import {
   Post,
   Excerpt,
@@ -112,7 +112,7 @@ export const Posts: Story = {
 };
 
 export const AuthorPosts: Story = {
-  render: (args: TPostsArgs) => {
+  render: (args: TPostsQueryArgs) => {
     const { posts } = usePosts({
       queryArgs: { page: args.page, per_page: args.per_page, author: args.author }
     });
@@ -154,7 +154,7 @@ export const AuthorPosts: Story = {
 };
 
 export const CategoryFilteredPosts: Story = {
-  render: (args: TPostsArgs) => {
+  render: (args: TPostsQueryArgs) => {
     const { posts } = usePosts({
       queryArgs: { page: args.page, per_page: args.per_page, categories: args.categories }
     });
@@ -201,7 +201,7 @@ export const CategoryFilteredPosts: Story = {
 };
 
 export const TagFilteredPosts: Story = {
-  render: (args: TPostsArgs) => {
+  render: (args: TPostsQueryArgs) => {
     const { posts } = usePosts({
       queryArgs: { page: args.page, per_page: args.per_page, tags: args.tags }
     });

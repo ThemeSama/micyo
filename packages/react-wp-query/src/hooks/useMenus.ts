@@ -1,24 +1,25 @@
-import { IQueryParams, IPostsQueryResults } from '../types';
+import { IQueryParams } from '../types';
+import { IMenusQueryResults } from '../types/menus';
 import { useWPQuery } from './useWPQuery';
 
-export const usePosts = ({
+export const useMenus = ({
   id,
-  queryKey = ['posts'],
+  queryKey = ['menus'],
   enabled = true,
   queryArgs
-}: IQueryParams<'posts'>): IPostsQueryResults => {
+}: IQueryParams<'menus'>): IMenusQueryResults => {
   const { list, single, headers, pagination } = useWPQuery({
     id,
     enabled,
     queryArgs,
     queryKey,
-    type: 'posts'
+    type: 'menus'
   });
 
   return {
     id,
-    post: single,
-    posts: list,
+    menu: single,
+    menus: list,
     headers,
     pagination
   };

@@ -1,21 +1,22 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { useCategories } from './useCategories';
+import { useTags } from './useTags';
 import { StorybookDecorator } from '../helpers/StorybookDecorator';
-import { TCategory, TPost } from '../types';
+import { TTag, TPost } from '../types';
 import { usePosts } from './usePosts';
 import {
   Author,
   Excerpt,
   Post,
-  Tags,
   Title,
+  Tags as MetaTags,
   Categories as MetaCategories,
   PostDate
 } from '../components';
 
-const meta: Meta<typeof useCategories> = {
-  title: 'react-wp-query/useCategories',
+const meta: Meta<typeof useTags> = {
+  title: 'react-wp-query/useTags',
   decorators: [
     (Story) => (
       <StorybookDecorator>
@@ -29,12 +30,12 @@ const meta: Meta<typeof useCategories> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof useCategories>;
+type Story = StoryObj<typeof useTags>;
 
-export const Categories: Story = {
+export const Tags: Story = {
   render: () => {
-    const [filteredCategories, setFilteredCategories] = React.useState<TCategory[]>();
-    const { categories } = useCategories({
+    const [filteredTags, setFilteredTags] = useState<TTag[]>();
+    const { tags } = useTags({
       queryArgs: {
         page: 1,
         per_page: 99,
@@ -43,53 +44,51 @@ export const Categories: Story = {
     });
 
     const { posts } = usePosts({
-      enabled: categories?.isFetched,
+      enabled: tags?.isFetched,
       queryArgs: {
         page: 1,
         per_page: 3,
-        categories: Array.isArray(filteredCategories)
-          ? filteredCategories?.map((cat) => cat?.id ?? -1)
-          : [],
+        tags: Array.isArray(filteredTags) ? filteredTags?.map((cat) => cat?.id ?? -1) : [],
         _embed: ['author', 'wp:term'],
         _fields: ['id', 'title', 'date', 'excerpt', '_embedded', '_links']
       }
     });
 
     const isSelected = React.useCallback(
-      (category: TCategory) => {
-        return filteredCategories?.find((cat) => cat.id === category.id) ? 'selected' : '';
+      (tag: TTag) => {
+        return filteredTags?.find((cat) => cat.id === tag.id) ? 'selected' : '';
       },
-      [filteredCategories]
+      [filteredTags]
     );
 
     return (
       <div className="micyo-news">
-        <ul className="micyo-categories">
+        <ul className="micyo-tags">
           <li>
-            <h3>Categories</h3>
+            <h3>Tags</h3>
           </li>
-          {Array.isArray(categories?.data) &&
-            categories?.data.map((category) => (
-              <li key={category?.id}>
+          {Array.isArray(tags?.data) &&
+            tags?.data.map((tag) => (
+              <li key={tag?.id}>
                 <button
                   type="button"
-                  className={isSelected(category)}
+                  className={isSelected(tag)}
                   onClick={() =>
-                    setFilteredCategories((prevList): TCategory[] => {
+                    setFilteredTags((prevList): TTag[] => {
                       if (Array.isArray(prevList)) {
-                        if (prevList.find((cat) => cat.id === category.id)) {
-                          return prevList.filter((cat) => cat.id !== category.id);
+                        if (prevList.find((cat) => cat.id === tag.id)) {
+                          return prevList.filter((cat) => cat.id !== tag.id);
                         } else {
-                          prevList?.push(category);
+                          prevList?.push(tag);
                           return prevList;
                         }
                       }
 
-                      return [category];
+                      return [tag];
                     })
                   }>
-                  {category?.name}
-                  {category?.count}
+                  {tag?.name}
+                  {tag?.count}
                 </button>
               </li>
             ))}
@@ -98,7 +97,7 @@ export const Categories: Story = {
           <h1>
             News
             <span className="micyo-total-news">
-              {filteredCategories?.map((cat) => cat.name).join(', ')}
+              {filteredTags?.map((cat) => cat.name).join(', ')}
             </span>
           </h1>
           {Array.isArray(posts?.data) &&
@@ -114,7 +113,7 @@ export const Categories: Story = {
                 <Excerpt />
                 <footer>
                   <PostDate />
-                  <Tags />
+                  <MetaTags />
                 </footer>
               </Post>
             ))}
@@ -124,13 +123,13 @@ export const Categories: Story = {
   }
 };
 
-export const Category: Story = {
+export const Tag: Story = {
   render: () => {
-    const { category } = useCategories({
+    const { tag } = useTags({
       id: 143
     });
 
-    const data = category?.data as TCategory;
+    const data = tag?.data as TTag;
 
     return <span>{data?.name}</span>;
   }

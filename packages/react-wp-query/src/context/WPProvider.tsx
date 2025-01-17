@@ -5,14 +5,22 @@ import apiFetch from '@wordpress/api-fetch';
 
 interface IWPProviderProps {
   api: string;
+  namespace?: string;
   clickEvent?: TClickEvent;
   formatDate?: TDateFormat;
   children: ReactNode;
 }
 
-export const WPProvider = ({ api, clickEvent, formatDate, children }: IWPProviderProps) => {
+export const WPProvider = ({
+  api,
+  namespace = '/wp/v2',
+  clickEvent,
+  formatDate,
+  children
+}: IWPProviderProps) => {
   const contextValues: UseWPContext = {
     api,
+    namespace,
     clickEvent,
     formatDate
   };

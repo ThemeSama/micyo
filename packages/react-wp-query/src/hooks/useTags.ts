@@ -1,24 +1,24 @@
-import { IQueryParams, IPostsQueryResults } from '../types';
+import { ITagsQueryResults, IQueryParams } from '../types';
 import { useWPQuery } from './useWPQuery';
 
-export const usePosts = ({
+export const useTags = ({
   id,
-  queryKey = ['posts'],
+  queryKey = ['tags'],
   enabled = true,
   queryArgs
-}: IQueryParams<'posts'>): IPostsQueryResults => {
+}: IQueryParams<'tags'>): ITagsQueryResults => {
   const { list, single, headers, pagination } = useWPQuery({
     id,
     enabled,
     queryArgs,
     queryKey,
-    type: 'posts'
+    type: 'tags'
   });
 
   return {
     id,
-    post: single,
-    posts: list,
+    tag: single,
+    tags: list,
     headers,
     pagination
   };
