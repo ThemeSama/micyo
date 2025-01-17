@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { useCategories } from './useCategories';
 import { StorybookDecorator } from '../helpers/StorybookDecorator';
-import { TCategory, TPost } from '../types';
+import { TCategoriesQueryArgs, TCategory, TPost } from '../types';
 import { usePosts } from './usePosts';
 import {
   Author,
@@ -13,6 +13,8 @@ import {
   Categories as MetaCategories,
   PostDate
 } from '../components';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { ghcolors } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const meta: Meta<typeof useCategories> = {
   title: 'react-wp-query/useCategories',
@@ -38,7 +40,9 @@ export const Categories: Story = {
       queryArgs: {
         page: 1,
         per_page: 99,
-        hide_empty: true
+        hide_empty: true,
+        orderby: 'count',
+        order: 'desc'
       }
     });
 
@@ -89,7 +93,7 @@ export const Categories: Story = {
                     })
                   }>
                   {category?.name}
-                  {category?.count}
+                  <span className="micyo-category-count">{category?.count}</span>
                 </button>
               </li>
             ))}
@@ -124,14 +128,34 @@ export const Categories: Story = {
   }
 };
 
-export const Category: Story = {
-  render: () => {
+export const CategoryResponse: Story = {
+  render: (queryArgs: TCategoriesQueryArgs) => {
     const { category } = useCategories({
-      id: 143
+      id: 143,
+      queryArgs
     });
 
     const data = category?.data as TCategory;
 
-    return <span>{data?.name}</span>;
+    return (
+      <SyntaxHighlighter
+        language="json"
+        style={ghcolors}
+        customStyle={{ border: 'none', padding: 0, margin: 0 }}>
+        {JSON.stringify(data, null, 2)}
+      </SyntaxHighlighter>
+    );
+  },
+  args: {
+    _fields: []
+  },
+  argTypes: {
+    _fields: {
+      control: {
+        type: 'inline-check'
+      },
+      options: ['id', 'count', 'name', 'slug', 'taxonomy'],
+      description: 'Response fields'
+    }
   }
 };

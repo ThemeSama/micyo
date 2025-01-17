@@ -63,22 +63,32 @@ export default App;
 
 The example below uses a custom fetch handler for making all the requests with axios.
 
-```
+```js
 import apiFetch from '@wordpress/api-fetch';
 import axios from 'axios';
 
-apiFetch.setFetchHandler( ( options ) => {
-	const { url, path, data, method } = options;
+apiFetch.setFetchHandler((options) => {
+  const { url, path, data, method } = options;
 
-	return axios( {
-		url: url || path,
-		method,
-		data,
-	} );
-} );
+  return axios({
+    url: url || path,
+    method,
+    data
+  });
+});
 ```
 
-## Hooks
+## Hooks
+
+- usePosts
+- usePages
+- useCategories
+- useTags
+- useSettings
+- useMenuItems
+- useMenus
+
+## Simple Usage
 
 Get posts with usePosts Hook
 

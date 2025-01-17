@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { useTags } from './useTags';
 import { StorybookDecorator } from '../helpers/StorybookDecorator';
-import { TTag, TPost } from '../types';
+import { TTag, TPost, TTagsQueryArgs } from '../types';
 import { usePosts } from './usePosts';
 import {
   Author,
@@ -14,6 +14,8 @@ import {
   Categories as MetaCategories,
   PostDate
 } from '../components';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { ghcolors } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const meta: Meta<typeof useTags> = {
   title: 'react-wp-query/useTags',
@@ -38,8 +40,10 @@ export const Tags: Story = {
     const { tags } = useTags({
       queryArgs: {
         page: 1,
-        per_page: 99,
-        hide_empty: true
+        per_page: 20,
+        hide_empty: true,
+        orderby: 'count',
+        order: 'desc'
       }
     });
 
@@ -88,7 +92,7 @@ export const Tags: Story = {
                     })
                   }>
                   {tag?.name}
-                  {tag?.count}
+                  <span className="micyo-tag-count">{tag?.count}</span>
                 </button>
               </li>
             ))}
@@ -123,14 +127,34 @@ export const Tags: Story = {
   }
 };
 
-export const Tag: Story = {
-  render: () => {
+export const TagResponse: Story = {
+  render: (queryArgs: TTagsQueryArgs) => {
     const { tag } = useTags({
-      id: 143
+      id: 437,
+      queryArgs
     });
 
     const data = tag?.data as TTag;
 
-    return <span>{data?.name}</span>;
+    return (
+      <SyntaxHighlighter
+        language="json"
+        style={ghcolors}
+        customStyle={{ border: 'none', padding: 0, margin: 0 }}>
+        {JSON.stringify(data, null, 2)}
+      </SyntaxHighlighter>
+    );
+  },
+  args: {
+    _fields: []
+  },
+  argTypes: {
+    _fields: {
+      control: {
+        type: 'inline-check'
+      },
+      options: ['id', 'count', 'name', 'slug', 'taxonomy'],
+      description: 'Response fields'
+    }
   }
 };

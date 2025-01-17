@@ -15,6 +15,8 @@ import {
   Author
 } from '../components';
 import { StorybookDecorator } from '../helpers/StorybookDecorator';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { ghcolors } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const meta: Meta<typeof usePosts> = {
   title: 'react-wp-query/usePosts',
@@ -282,20 +284,30 @@ export const PostFeaturedImage: Story = {
   }
 };
 
-/*export const PasswordProtectedPost: Story = {
-  render: () => {
-    const [password, setPassword] = React.useState('');
-    const { post } = usePosts({ id: 1168, queryArgs: { password } });
-    const data = post.data as TPost;
+export const PostsResponse: Story = {
+  render: (queryArgs: TPostsQueryArgs) => {
+    const { posts } = usePosts({ queryArgs });
 
-    return post.isLoading ? (
+    return posts.isLoading ? (
       <>Loading...</>
     ) : (
-      <Post post={data}>
-        <Title />
-        <Content />
-        {!password && <button onClick={() => setPassword('enter')}>Open Content</button>}
-      </Post>
+      <SyntaxHighlighter language="json" style={ghcolors} customStyle={{ fontSize: 14 }}>
+        {JSON.stringify(posts.data, null, 2)}
+      </SyntaxHighlighter>
     );
+  },
+  args: {
+    page: 1,
+    per_page: 3,
+    _fields: []
+  },
+  argTypes: {
+    _fields: {
+      control: {
+        type: 'inline-check'
+      },
+      options: ['id', 'title', 'date', 'excerpt', 'content', '_embedded', '_links'],
+      description: 'Response fields'
+    }
   }
-};*/
+};

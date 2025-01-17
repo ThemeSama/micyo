@@ -4,7 +4,7 @@ import { useSettings } from './useSettings';
 import { StorybookDecorator } from '../helpers/StorybookDecorator';
 import { http, HttpResponse } from 'msw';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { ghcolors } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const meta: Meta<typeof useSettings> = {
   title: 'react-wp-query/useSettings',
@@ -23,7 +23,7 @@ const meta: Meta<typeof useSettings> = {
 export default meta;
 type Story = StoryObj<typeof useSettings>;
 
-export const Settings: Story = {
+export const SettingsResponse: Story = {
   render: () => {
     const settings = useSettings();
 
@@ -32,21 +32,15 @@ export const Settings: Story = {
     ) : (
       <SyntaxHighlighter
         language="json"
-        style={nord}
-        customStyle={{
-          fontSize: '16px', // Font boyutunu ayarlayın
-          fontFamily: 'Fira Code, monospace', // Monospace bir font kullanabilirsiniz
-          lineHeight: '1.5', // Satır yüksekliği
-          borderRadius: '8px', // Köşeleri yuvarlatabilirsiniz
-          padding: '16px' // İç boşluk ekleyebilirsiniz
-        }}>
+        style={ghcolors}
+        customStyle={{ border: 'none', padding: 0, margin: 0 }}>
         {JSON.stringify(settings.data, null, 2)}
       </SyntaxHighlighter>
     );
   }
 };
 
-Settings.parameters = {
+SettingsResponse.parameters = {
   msw: {
     handlers: [
       http.get('https://wordpress.org/news/wp-json/wp/v2/settings', ({ request }) => {
