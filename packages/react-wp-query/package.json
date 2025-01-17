@@ -47,7 +47,7 @@
   "bugs": {
     "url": "https://github.com/ThemeSama/micyo/issues"
   },
-  "homepage": "https://github.com/ThemeSama/micyo#readme",
+  "homepage": "https://micyo.vercel.app/?path=/docs/react-wp-query-about-library--docs",
   "peerDependencies": {
     "@tanstack/react-query": "^5.0.0",
     "@wordpress/api-fetch": "^7.0.0",
