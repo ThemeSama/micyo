@@ -1,5 +1,13 @@
 ## @micyo/react-wp-query changelog
 
+### 2.0.0
+
+- feat: useTags hook
+- feat: useSettings hook
+- update: dependencies
+- feat: usePages hook
+- update: docs improvement
+
 ### 1.3.0
 
 - feat: useCategories hook
