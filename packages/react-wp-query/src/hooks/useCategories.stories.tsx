@@ -37,7 +37,8 @@ export const Categories: Story = {
     const { categories } = useCategories({
       queryArgs: {
         page: 1,
-        per_page: 99
+        per_page: 99,
+        hide_empty: true
       }
     });
 

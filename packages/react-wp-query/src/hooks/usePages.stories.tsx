@@ -22,6 +22,14 @@ const meta: Meta<typeof usePages> = {
 export default meta;
 type Story = StoryObj<typeof usePages>;
 
+export const PageSlug: Story = {
+  render: () => {
+    const { pages } = usePages({ queryArgs: { slug: 'news' } });
+
+    return pages.isLoading ? <>Loading...</> : <>Test</>;
+  }
+};
+
 export const Single: Story = {
   render: () => {
     const { page } = usePages({ id: 15740, queryArgs: { _embed: true } });

@@ -28,6 +28,7 @@ export type TClickEvent = (args: TClickArgs) => void;
 
 export interface UseWPContext {
   api: string;
+  namespace?: string;
   clickEvent?: TClickEvent;
   formatDate?: TDateFormat;
 }

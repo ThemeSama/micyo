@@ -6,6 +6,7 @@ import { AxiosResponse } from 'axios';
 import apiFetch from '@wordpress/api-fetch';
 import { isFetchResponse } from '../helpers/isFetchResponse';
 import { ApiTypes, SingleApiTypes, IQueryParams } from '../types';
+import { useWPContext } from './useWPContext';
 
 export const useWPQuery = <T extends keyof ApiTypes>({
   id,
@@ -15,6 +16,7 @@ export const useWPQuery = <T extends keyof ApiTypes>({
   type
 }: IQueryParams<T>) => {
   const { pagination, headers, setHeaders } = usePagination(queryArgs?.page);
+  const { namespace } = useWPContext();
 
   const queryParams = useMemo(() => {
     return addQueryArgs('', queryArgs);
@@ -25,7 +27,7 @@ export const useWPQuery = <T extends keyof ApiTypes>({
     enabled: enabled && !id,
     queryFn: async ({ signal }): Promise<ApiTypes[T]> => {
       const response: Response | AxiosResponse = await apiFetch({
-        path: addQueryArgs(`/wp/v2/${type}`, queryArgs),
+        path: `${namespace}/${type}${queryParams}`,
         signal,
         parse: false
       });
@@ -47,7 +49,7 @@ export const useWPQuery = <T extends keyof ApiTypes>({
     enabled: !!id,
     queryFn: async ({ signal }): Promise<SingleApiTypes[T]> => {
       const response: Response | AxiosResponse = await apiFetch({
-        path: addQueryArgs(`/wp/v2/${type}/${id}`, queryArgs),
+        path: addQueryArgs(`${namespace}/${type}/${id}`, queryArgs),
         signal,
         parse: false
       });

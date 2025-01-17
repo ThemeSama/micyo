@@ -38,7 +38,8 @@ export const Tags: Story = {
     const { tags } = useTags({
       queryArgs: {
         page: 1,
-        per_page: 99
+        per_page: 99,
+        hide_empty: true
       }
     });
 
@@ -47,9 +48,7 @@ export const Tags: Story = {
       queryArgs: {
         page: 1,
         per_page: 3,
-        tags: Array.isArray(filteredTags)
-          ? filteredTags?.map((cat) => cat?.id ?? -1)
-          : [],
+        tags: Array.isArray(filteredTags) ? filteredTags?.map((cat) => cat?.id ?? -1) : [],
         _embed: ['author', 'wp:term'],
         _fields: ['id', 'title', 'date', 'excerpt', '_embedded', '_links']
       }

@@ -9,3 +9,4 @@ export * from './users';
 export * from './tags';
 export * from './menus';
 export * from './pages';
+export * from './settings';

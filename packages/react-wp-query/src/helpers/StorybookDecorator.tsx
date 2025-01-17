@@ -8,10 +8,13 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 
 interface IStorybookDecoratorArgs {
+  mock?: boolean;
   children: ReactNode;
 }
 
-export const StorybookDecorator = ({ children }: IStorybookDecoratorArgs) => {
+export const StorybookDecorator = ({ mock = false, children }: IStorybookDecoratorArgs) => {
+  const api = 'https://wordpress.org/news/wp-json/';
+
   const clickEvent = useCallback(({ event, type, values }: TClickArgs) => {
     event.preventDefault();
     //
@@ -22,10 +25,7 @@ export const StorybookDecorator = ({ children }: IStorybookDecoratorArgs) => {
   }, []);
 
   return (
-    <WPProvider
-      api="https://wordpress.org/news/wp-json/"
-      clickEvent={clickEvent}
-      formatDate={formatDate}>
+    <WPProvider api={api} clickEvent={clickEvent} formatDate={formatDate}>
       <QueryClientProvider client={queryClient}>
         <>{children}</>
       </QueryClientProvider>

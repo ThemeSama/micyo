@@ -1,7 +1,10 @@
 import type { Preview } from '@storybook/react';
+import { initialize, mswLoader } from 'msw-storybook-addon';
 import './global.css';
 import './react-forms.css';
 import './react-wp-query.css';
+
+initialize();
 
 const preview: Preview = {
   parameters: {
@@ -39,7 +42,9 @@ const preview: Preview = {
     }
   },
 
-  tags: ['autodocs']
+  tags: ['autodocs'],
+
+  loaders: [mswLoader]
 };
 
 export default preview;
