@@ -3,6 +3,7 @@ export * from './useMenuItems';
 export * from './useMenus';
 export * from './usePages';
 export * from './usePagination';
+export * from './usePosts';
 export * from './usePost';
 export * from './useSettings';
 export * from './useTags';
