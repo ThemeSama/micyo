@@ -1,6 +1,6 @@
 {
   "name": "@micyo/react-wp-query",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "WordPress REST API React implementations",
   "type": "module",
   "types": "dist/legacy/index.d.ts",
@@ -51,7 +51,7 @@
   "peerDependencies": {
     "@tanstack/react-query": "^5.0.0",
     "@wordpress/api-fetch": "^7.22.0",
-    "react": ">=18.0.0"
+    "react": ">=19.0.0"
   },
   "devDependencies": {
     "@tanstack/react-query": "^5.75.0",

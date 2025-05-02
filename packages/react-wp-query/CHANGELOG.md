@@ -1,5 +1,10 @@
 ## @micyo/react-wp-query changelog
 
+### 2.1.0
+
+- update: dependencies
+- feat: React 19 support
+
 ### 2.0.0
 
 - feat: useTags hook

@@ -52,7 +52,8 @@
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "storybook-https": "storybook dev -p 6006 --https --ssl-cert ./localhost.crt --ssl-key ./localhost.key",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build-packages": "npm run build -w packages/react-can && npm run build -w packages/react-forms && npm run build -w packages/react-wp-query"
   },
   "msw": {
     "workerDirectory": [
