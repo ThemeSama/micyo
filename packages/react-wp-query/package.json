@@ -50,14 +50,14 @@
   "homepage": "https://micyo.vercel.app/?path=/docs/react-wp-query-about-library--docs",
   "peerDependencies": {
     "@tanstack/react-query": "^5.0.0",
-    "@wordpress/api-fetch": "^7.0.0",
+    "@wordpress/api-fetch": "^7.22.0",
     "react": ">=18.0.0"
   },
   "devDependencies": {
-    "@tanstack/react-query": "^5.62.7",
+    "@tanstack/react-query": "^5.75.0",
     "@types/styled-components": "^5.1.34",
-    "@wordpress/api-fetch": "^7.14.0",
-    "axios": "^1.7.9",
-    "styled-components": "^6.1.13"
+    "@wordpress/api-fetch": "^7.22.0",
+    "axios": "^1.9.0",
+    "styled-components": "^6.1.17"
   }
 }
