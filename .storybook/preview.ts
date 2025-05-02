@@ -41,10 +41,8 @@ const preview: Preview = {
       }
     }
   },
-
-  tags: ['autodocs'],
-
-  loaders: [mswLoader]
+  loaders: [mswLoader],
+  tags: ['autodocs']
 };
 
 export default preview;

@@ -46,6 +46,6 @@
   },
   "homepage": "https://github.com/ThemeSama/micyo#readme",
   "peerDependencies": {
-    "react": ">=18.0.0"
+    "react": ">=19.0.0"
   }
 }
