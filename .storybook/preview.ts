@@ -41,7 +41,7 @@ const preview: Preview = {
       }
     }
   },
-
+  loaders: [mswLoader],
   tags: ['autodocs']
 };
 
