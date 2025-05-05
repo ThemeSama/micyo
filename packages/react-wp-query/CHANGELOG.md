@@ -1,5 +1,9 @@
 ## @micyo/react-wp-query changelog
 
+### 2.1.2
+
+- feat: Added className prop for components
+
 ### 2.1.1
 
 - fix: usePosts hook exports
