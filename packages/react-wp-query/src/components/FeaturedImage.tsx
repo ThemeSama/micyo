@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { usePost } from '../hooks';
 
-export const FeaturedImage = ({ size = 'full' }) => {
+export const FeaturedImage = ({ size = 'full', className = '' }) => {
   const { _embedded } = usePost(),
     image = _embedded && _embedded['wp:featuredmedia']?.find((t) => t.media_type === 'image');
 
@@ -9,5 +9,7 @@ export const FeaturedImage = ({ size = 'full' }) => {
 
   const imageURL = image?.media_details?.sizes[size]?.source_url;
 
-  return image ? <img src={imageURL} alt={image.alt_text} /> : null;
+  return image ? (
+    <img src={imageURL} alt={image.alt_text} className={`micyo-article-image ${className}`} />
+  ) : null;
 };
