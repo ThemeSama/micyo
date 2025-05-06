@@ -1,5 +1,9 @@
 ## @micyo/react-wp-query changelog
 
+### 2.1.3
+
+- feat: Added FeaturedImage component props for img tag
+
 ### 2.1.2
 
 - feat: Added className prop for components

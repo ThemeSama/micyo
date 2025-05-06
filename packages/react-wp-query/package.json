@@ -1,6 +1,6 @@
 {
   "name": "@micyo/react-wp-query",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "WordPress REST API React implementations",
   "type": "module",
   "types": "dist/legacy/index.d.ts",
